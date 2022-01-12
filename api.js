@@ -6,10 +6,9 @@ const dotenv = require('dotenv').config();
 // https://theoephraim.github.io/node-google-spreadsheet/#/
 // https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
 
-console.log('hello world');
-console.log(process.env.REACT_APP_CLIENT_EMAIL);
-console.log(process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, '\n'));
-// console.log(creds.private_key.replace(/\\n/g, '\n'));
+//console.log('hello world');
+//console.log(process.env.REACT_APP_CLIENT_EMAIL);
+//console.log(process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, '\n'));
 
 const docId = '1YvznM3U5FS6SnirNS_JyLHElkD4FlqVJu_qz_-NIhWg';
 const sheetNames = ['Players', 'Draft'];
@@ -17,19 +16,28 @@ const sheetNames = ['Players', 'Draft'];
 async function getDataFromSheets(docId, sheetNames) {
   // get doc by docID
   const doc = new GoogleSpreadsheet.GoogleSpreadsheet(docId);
-  doc.useApiKey(process.env.REACT_APP_API_KEY);
+  // doc.useApiKey(process.env.REACT_APP_API_KEY);
+
+  await doc.useServiceAccountAuth({
+    client_email: process.env.REACT_APP_CLIENT_EMAIL,
+    private_key: process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  });
 
   // load info
   await doc.loadInfo();
 
-  // get sheet bdata
+  //console.log(doc.sheetsByTitle);
+
+  // get sheet data
   const data = [];
-  for (let sheetName in sheetNames) {
+  console.log(sheetNames);
+  for (const sheetName of sheetNames) {
+    console.log(sheetName);
     let sheet = doc.sheetsByTitle[sheetName];
     await sheet.loadHeaderRow();
     let rows = await sheet.getRows({ offset: 0 });
     let headers = sheet.headerValues;
-    data.append({ sheetName: { headers, rows } });
+    data.push({ sheetName: { headers, rows } });
   }
   return data;
 }
