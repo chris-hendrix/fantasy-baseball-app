@@ -4,7 +4,6 @@ export const getDataFromSheets = async (docId, sheetNames) => {
   // get doc by docID
   const doc = new GoogleSpreadsheet.GoogleSpreadsheet(docId);
   // doc.useApiKey(process.env.REACT_APP_API_KEY);
-
   await doc.useServiceAccountAuth({
     client_email: process.env.REACT_APP_CLIENT_EMAIL,
     private_key: process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, '\n'),
