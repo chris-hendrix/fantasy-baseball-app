@@ -1,5 +1,5 @@
-const GoogleSpreadsheet = require('google-spreadsheet');
-const creds = require('./client_secret.json');
+// const GoogleSpreadsheet = require('google-spreadsheet');
+const creds = require('./client/client_secret.json');
 const dotenv = require('dotenv').config();
 
 // https://www.npmjs.com/package/google-spreadsheet
@@ -25,6 +25,8 @@ async function getDataFromSheets(docId, sheetNames) {
 
   // load info
   await doc.loadInfo();
+
+  console.log(doc)
 
   //console.log(doc.sheetsByTitle);
 

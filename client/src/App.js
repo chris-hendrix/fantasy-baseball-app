@@ -1,4 +1,4 @@
-import dataService from './services/data'
+//import dataService from './services/data'
 
 const docId = '1YvznM3U5FS6SnirNS_JyLHElkD4FlqVJu_qz_-NIhWg'
 const sheetNames = ['Players', 'Draft']
