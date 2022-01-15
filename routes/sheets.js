@@ -7,7 +7,7 @@ sheetRouter.get('/', async (req, res) => {
   res.status(200).json(sheetData)
 })
 
-sheetRouter.get('/dynamic', async (req, res) => {
+sheetRouter.get('/draft', async (req, res) => {
   const sheetNames = ['Draft', 'OwnerDraft', 'Players']
   const sheetData = await sheet.getDataFromSheets(
     config.DOC_ID,
