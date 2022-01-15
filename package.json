@@ -1,0 +1,34 @@
+{
+  "name": "fantasy-baseball-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "server": "NODE_ENV=development nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris-hendrix/fantasy-baseball-app.git"
+  },
+  "author": "Chris Hendrix",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chris-hendrix/fantasy-baseball-app/issues"
+  },
+  "homepage": "https://github.com/chris-hendrix/fantasy-baseball-app#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^12.0.3",
+    "epress": "^0.0.1-security",
+    "express-async-errors": "^3.1.1",
+    "google-spreadsheet": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "eslint": "^8.6.0",
+    "nodemon": "^2.0.15"
+  }
+}

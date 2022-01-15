@@ -1,0 +1,5 @@
+### GET all sheet data
+GET http://localhost:5000/api/sheets
+
+### GET dynamic sheet data
+GET http://localhost:5000/api/sheets/dynamic
