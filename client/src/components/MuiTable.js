@@ -12,7 +12,7 @@ import {
   TableRow
 } from '@mui/material'
 
-import ReactTablePaginationActions from './ReactTablePaginationActions'
+import TablePaginationActions from './TablePaginationActions'
 
 const StyledTableHeaderCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,7 +45,7 @@ const addHyperlinksToColumns = columns => {
   })
 }
 
-export default function ReactTable({columns, data, defaultPageSize}) {
+export default function MuiTable({columns, data, defaultPageSize}) {
   addHyperlinksToColumns(columns)
 
   // Use the state and functions returned from useTable to build your UI
@@ -114,7 +114,7 @@ export default function ReactTable({columns, data, defaultPageSize}) {
             }}
             onPageChange={(event, newPage) => gotoPage(newPage)}
             onRowsPerPageChange={event => setPageSize(Number(event.target.value))}
-            ActionsComponent={ReactTablePaginationActions}
+            ActionsComponent={TablePaginationActions}
           />
         </TableRow>
       </TableFooter>

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ReactTablePaginationActions(props) {
+export default function TablePaginationActions(props) {
   const classes = useStyles()
   const theme = useTheme()
   const {count, page, rowsPerPage, onPageChange} = props
@@ -68,7 +68,7 @@ export default function ReactTablePaginationActions(props) {
   )
 }
 
-ReactTablePaginationActions.propTypes = {
+TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
