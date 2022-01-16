@@ -19,10 +19,8 @@ const getStaticData = async () => {
     // try to get data from cache
     const localData = JSON.parse(localDataString)
     const cacheDate = new Date(cacheDateString)
-    console.log(cacheDate)
     const ageInTime = today.getTime() - cacheDate.getTime()
     const ageInDays = ageInTime / (1000 * 3600 * 24)
-    console.log(ageInDays)
     if (ageInDays < MAX_CACHE_DAYS) return localData
   } else {
     // get data and set cache

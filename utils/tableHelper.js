@@ -1,4 +1,4 @@
-const getTableData = (sheetData) => {
+const getTableData = sheetData => {
   const tableData = {}
   Object.entries(sheetData).forEach(([sheetTitle, {headers, rows}]) => {
     const {columns, data} = getColumnsAndData(headers, rows)
@@ -24,11 +24,22 @@ const getData = (columns, rows) => {
 }
 
 const getColumn = header => {
-  let [columnName, option, hidden] = [header, '', false]
-  const accessor = getAccessor(header)
-  if (header.includes(' - ')) [columnName, option] = header.split(' - ')
-  if (option.toLowerCase().includes('hidden')) hidden = true
-  return {Header: columnName, accessor, hidden, header, headerGroup: ''}
+  const column = {
+    Header: header,
+    accessor: getAccessor(header),
+    show: true,
+    option: ''
+  }
+  if (header.includes(' - ')) [column.Header, column.option] = header.split(' - ')
+  // hidden
+  if (column.option.toLowerCase().includes('hidden')) column.show = false
+  // hyperlink link
+  if (column.Header.toLowerCase().includes('hyperlink')) column.show = false
+  // hyperlink reference
+  if (column.option.toLowerCase().includes('hyperlink'))
+    column.linkAccessor = getAccessor(column.option)
+
+  return column
 }
 
 const getAccessor = columnName => {
