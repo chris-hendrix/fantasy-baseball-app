@@ -11,7 +11,7 @@ import HistoryPage from './components/pages/HistoryPage'
 import RulePage from './components/pages/RulePage'
 
 import {useSelector, useDispatch} from 'react-redux'
-import { getStaticData } from './reducers/dataReducer'
+import {getStaticData, clearCache} from './reducers/dataReducer'
 
 import {Container} from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/styles'
@@ -19,7 +19,10 @@ import theme from './theme'
 
 export default function App() {
   const dispatch = useDispatch()
-  useEffect(() => dispatch(getStaticData()))
+  // clear cache on first load
+  // useEffect(() => dispatch(clearCache()), [dispatch])
+  // load static data
+  useEffect(() => dispatch(getStaticData()), [])
 
   return (
     <ThemeProvider theme={theme}>

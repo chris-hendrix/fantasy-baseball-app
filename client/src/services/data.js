@@ -1,15 +1,43 @@
 import axios from 'axios'
 const baseUrl = '/api/sheets'
 
+const STATIC_DATA_KEY = 'staticData'
+const CACHE_DATE_KEY = 'cacheDate'
+const MAX_CACHE_DAYS = 30
+
 const getDraftData = async () => {
   const response = await axios.get(`${baseUrl}/draft`)
   return response.data
 }
 
 const getStaticData = async () => {
-  const response = await axios.get(`${baseUrl}/static`)
-  return response.data
+  // try to get data from cache
+  const localDataString = window.localStorage.getItem(STATIC_DATA_KEY)
+  const cacheDateString = window.localStorage.getItem(CACHE_DATE_KEY)
+  const today = new Date()
+  if (localDataString && cacheDateString) {
+    // try to get data from cache
+    const localData = JSON.parse(localDataString)
+    const cacheDate = new Date(cacheDateString)
+    console.log(cacheDate)
+    const ageInTime = today.getTime() - cacheDate.getTime()
+    const ageInDays = ageInTime / (1000 * 3600 * 24)
+    console.log(ageInDays)
+    if (ageInDays < MAX_CACHE_DAYS) return localData
+  } else {
+    // get data and set cache
+    const response = await axios.get(`${baseUrl}/static`)
+    const data = response.data
+    window.localStorage.setItem(STATIC_DATA_KEY, JSON.stringify(data))
+    window.localStorage.setItem(CACHE_DATE_KEY, today.toString())
+    return data
+  }
 }
 
-const dataService = {getDraftData, getStaticData}
+const clearCache = () => {
+  window.localStorage.removeItem(STATIC_DATA_KEY)
+  window.localStorage.removeItem(CACHE_DATE_KEY)
+}
+
+const dataService = {getDraftData, getStaticData, clearCache}
 export default dataService
