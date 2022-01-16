@@ -1,6 +1,6 @@
 const GoogleSpreadsheet = require('google-spreadsheet')
 
-const getDataFromSheets = async (docId, clientEmail, privateKey, sheetNames = null) => {
+const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) => {
   // load from spreadsheet api
   const doc = new GoogleSpreadsheet.GoogleSpreadsheet(docId)
   await doc.useServiceAccountAuth({
@@ -10,7 +10,7 @@ const getDataFromSheets = async (docId, clientEmail, privateKey, sheetNames = nu
   await doc.loadInfo()
 
   // get sheet data
-  const data = {}
+  const sheetData = {}
   const sheetTitles = sheetNames || Object.keys(doc.sheetsByTitle)
   for (const sheetTitle of sheetTitles) {
     let sheet = doc.sheetsByTitle[sheetTitle]
@@ -19,13 +19,13 @@ const getDataFromSheets = async (docId, clientEmail, privateKey, sheetNames = nu
       let rows = await sheet.getRows({offset: 0})
       rows = rows.map(row => row._rawData)
       let headers = sheet.headerValues
-      data[sheetTitle] = {headers, rows}
+      sheetData[sheetTitle] = {headers, rows}
     } catch (error) {
       console.log(`error for sheet ${sheetTitle}`)
       console.log(error)
     }
   }
-  return data
+  return sheetData
 }
 
-module.exports = {getDataFromSheets}
+module.exports = {getSheetData}
