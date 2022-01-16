@@ -31,7 +31,6 @@ export const getDraftData = () => async (dispatch) => {
   dispatch({type: GET_DRAFT_DATA, data: draftData})
 }
 
-
 export const getStaticData = () => async (dispatch) => {
   const staticData = await dataService.getStaticData()
   dispatch({type: GET_STATIC_DATA, data: staticData})
