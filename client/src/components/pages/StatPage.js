@@ -7,9 +7,5 @@ export default function HomePage() {
   const seasonStatsTableData = useSelector(state => state.data.static.SeasonStats)
   const dispatch = useDispatch()
   useEffect(() => dispatch(getStaticData()), [dispatch])
-  return (
-    <div>
-      {seasonStatsTableData && <ReactTable {...seasonStatsTableData} />}
-    </div>
-  )
+  return <div>{seasonStatsTableData && <ReactTable {...seasonStatsTableData} />}</div>
 }

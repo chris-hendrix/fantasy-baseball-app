@@ -1,7 +1,18 @@
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
-import {useTable} from 'react-table'
+import React, {useState} from 'react'
+import {usePagination, useTable, useSortBy} from 'react-table'
 import {styled} from '@mui/material/styles'
 import {tableCellClasses} from '@mui/material/TableCell'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableFooter,
+  TablePagination,
+  TableRow
+} from '@mui/material'
+
+import ReactTablePaginationActions from './ReactTablePaginationActions'
 
 const StyledTableHeaderCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
   }
 }))
 
-const addHyperlinksToColumns = columns =>{
+const addHyperlinksToColumns = columns => {
   columns.forEach(column => {
     if (!column.linkAccessor) return
     column.Cell = ({row}) => (
@@ -34,35 +45,50 @@ const addHyperlinksToColumns = columns =>{
   })
 }
 
-export default function ReactTable({columns, data}) {
-  
+export default function ReactTable({columns, data, defaultPageSize}) {
   addHyperlinksToColumns(columns)
 
   // Use the state and functions returned from useTable to build your UI
-  const {getTableProps, headerGroups, rows, prepareRow} = useTable({
-    columns,
-    data,
-    initialState: {
-      hiddenColumns: columns.filter(col => col.show === false).map(col => col.accessor)
-    }
-  })
+  const {
+    getTableProps,
+    headerGroups,
+    page,
+    prepareRow,
+    gotoPage,
+    setPageSize,
+    state: {pageIndex, pageSize}
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: defaultPageSize || 100,
+        hiddenColumns: columns.filter(col => col.show === false).map(col => col.accessor)
+      }
+    },
+    useSortBy,
+    usePagination
+  )
+
 
   // Render the UI for your table
   return (
     <Table size="small" padding="none" {...getTableProps()}>
       <TableHead>
+        {console.log(pageIndex)}
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <StyledTableHeaderCell {...column.getHeaderProps()}>
+              <StyledTableHeaderCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
+                <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
               </StyledTableHeaderCell>
             ))}
           </TableRow>
         ))}
       </TableHead>
       <TableBody>
-        {rows.map((row, i) => {
+        {page.map((row, i) => {
           prepareRow(row)
           return (
             <StyledTableRow {...row.getRowProps()}>
@@ -73,6 +99,25 @@ export default function ReactTable({columns, data}) {
           )
         })}
       </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TablePagination
+            rowsPerPageOptions={[10, 50, 100, 220, {label: 'All', value: data.length}]}
+            colSpan={8}
+            count={data.length}
+            rowsPerPage={pageSize}
+            labelRowsPerPage={'Rows:'}
+            page={pageIndex}
+            SelectProps={{
+              inputProps: {'aria-label': 'rows per page'},
+              native: true
+            }}
+            onPageChange={(event, newPage) => gotoPage(newPage)}
+            onRowsPerPageChange={event => setPageSize(Number(event.target.value))}
+            ActionsComponent={ReactTablePaginationActions}
+          />
+        </TableRow>
+      </TableFooter>
     </Table>
   )
 }

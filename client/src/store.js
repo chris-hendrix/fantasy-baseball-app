@@ -7,5 +7,4 @@ const reducer = combineReducers({
   data: dataReducer
 })
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
-console.log(store)
 export default store
