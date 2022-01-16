@@ -8,10 +8,9 @@ export default function HomePage() {
   const draftTableData = useSelector(state => state.data.draft.Draft)
   const dispatch = useDispatch()
   useEffect(() => dispatch(getDraftData()), [dispatch])
-  console.log(draftTableData)
   return (
-    <Container>
+    <div>
       {draftTableData && <ReactTable {...draftTableData} />}
-    </Container>
+    </div>
   )
 }

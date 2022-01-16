@@ -28,7 +28,7 @@ const getColumn = header => {
   const accessor = getAccessor(header)
   if (header.includes(' - ')) [columnName, option] = header.split(' - ')
   if (option.toLowerCase().includes('hidden')) hidden = true
-  return {columnName, accessor, hidden, header, headerGroup: ''}
+  return {Header: columnName, accessor, hidden, header, headerGroup: ''}
 }
 
 const getAccessor = columnName => {

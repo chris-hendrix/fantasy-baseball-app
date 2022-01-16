@@ -18,6 +18,9 @@ app.use(middleware.requestLogger);
 
 app.use('/api/sheets', sheetRouter)
 
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+
 const server = http.createServer(app);
 server.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}, NODE_ENV=${config.NODE_ENV}`)
