@@ -52,7 +52,6 @@ const addColumnOptions = (columns, columnOptions) => {
     if (column.Header in columnOptions) {
       Object.assign(column, columnOptions[column.Header])
       column.disableFilters = typeof column.Filter === 'undefined'
-      console.log(column)
     }
   })
 }
@@ -103,7 +102,7 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <StyledTableHeaderCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+              <StyledTableHeaderCell style={{ verticalAlign: 'top' }} {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
                 <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                 <div>{column.canFilter ? column.render('Filter') : null}</div>

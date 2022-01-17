@@ -15,21 +15,22 @@ const getStaticData = async () => {
   const localDataString = window.localStorage.getItem(STATIC_DATA_KEY)
   const cacheDateString = window.localStorage.getItem(CACHE_DATE_KEY)
   const today = new Date()
+  /*
+  // try to get data from cache
   if (localDataString && cacheDateString) {
-    // try to get data from cache
     const localData = JSON.parse(localDataString)
     const cacheDate = new Date(cacheDateString)
     const ageInTime = today.getTime() - cacheDate.getTime()
     const ageInDays = ageInTime / (1000 * 3600 * 24)
     if (ageInDays < MAX_CACHE_DAYS) return localData
-  } else {
-    // get data and set cache
-    const response = await axios.get(`${baseUrl}/static`)
-    const data = response.data
-    window.localStorage.setItem(STATIC_DATA_KEY, JSON.stringify(data))
-    window.localStorage.setItem(CACHE_DATE_KEY, today.toString())
-    return data
   }
+  */
+  // get data and set cache
+  const response = await axios.get(`${baseUrl}/static`)
+  const data = response.data
+  window.localStorage.setItem(STATIC_DATA_KEY, JSON.stringify(data))
+  window.localStorage.setItem(CACHE_DATE_KEY, today.toString())
+  return data
 }
 
 const clearCache = () => {

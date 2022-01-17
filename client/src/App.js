@@ -11,18 +11,32 @@ import HistoryPage from './components/pages/HistoryPage'
 import RulePage from './components/pages/RulePage'
 
 import {useSelector, useDispatch} from 'react-redux'
-import {getStaticData, clearCache} from './reducers/dataReducer'
+import {getStaticData, getDraftData, clearCache} from './reducers/dataReducer'
+
+import { useInterval } from './hooks/useInterval'
 
 import {Container} from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/styles'
 import theme from './theme'
 
+const DRAFT_UPDATE_INTERVAL = 10000
+
 export default function App() {
   const dispatch = useDispatch()
-  // clear cache on first load
-  // useEffect(() => dispatch(clearCache()), [dispatch])
-  // load static data
-  useEffect(() => dispatch(getStaticData()), [])
+  const location = useLocation()
+
+  // load data on first load
+  useEffect(() => {
+    dispatch(getStaticData())
+    dispatch(getDraftData())
+  }, [dispatch])
+
+  // update draft tables on interval if on draft page
+  useInterval(() => {
+    if (location && location.pathname.toLowerCase().includes('draft')) {
+      dispatch(getDraftData())
+    }
+  }, DRAFT_UPDATE_INTERVAL)
 
   return (
     <ThemeProvider theme={theme}>
