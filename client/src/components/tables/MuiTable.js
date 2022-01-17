@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {usePagination, useTable, useSortBy} from 'react-table'
+import React, {useMemo} from 'react'
+import {usePagination, useTable, useSortBy, useFilters} from 'react-table'
 import {styled} from '@mui/material/styles'
 import {tableCellClasses} from '@mui/material/TableCell'
 import {
@@ -12,7 +12,10 @@ import {
   TableRow
 } from '@mui/material'
 
+
+
 import TablePaginationActions from './TablePaginationActions'
+import TableFilters from './TableFilters'
 
 const StyledTableHeaderCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,8 +48,29 @@ const addHyperlinksToColumns = columns => {
   })
 }
 
-export default function MuiTable({columns, data, defaultPageSize}) {
+const addFiltersToColumns = (columns, filterMap) => {
+  if (!filterMap) return
+  columns.forEach(column => {
+    if (column.Header in filterMap) {
+      const filterName = filterMap[column.Header]
+      column.Filter = TableFilters[filterName]
+      console.log(column)
+    }
+  })
+}
+
+export default function MuiTable({columns, data, defaultPageSize, filterMap}) {
   addHyperlinksToColumns(columns)
+  addFiltersToColumns(columns, filterMap)
+
+  const filterTypes = useMemo(()=>(TableFilters.filterTypes),[])
+
+  const defaultColumn = useMemo(
+    () => ({
+      Filter: TableFilters.DefaultColumnFilter
+    }),
+    []
+  )
 
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -61,27 +85,29 @@ export default function MuiTable({columns, data, defaultPageSize}) {
     {
       columns,
       data,
+      filterTypes,
+      defaultColumn,
       initialState: {
         pageSize: defaultPageSize || 100,
         hiddenColumns: columns.filter(col => col.show === false).map(col => col.accessor)
       }
     },
+    useFilters,
     useSortBy,
     usePagination
   )
-
 
   // Render the UI for your table
   return (
     <Table size="small" padding="none" {...getTableProps()}>
       <TableHead>
-        {console.log(pageIndex)}
         {headerGroups.map(headerGroup => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
               <StyledTableHeaderCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
                 <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                <div>{column.canFilter ? column.render('Filter') : null}</div>
               </StyledTableHeaderCell>
             ))}
           </TableRow>

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import MuiTable from '../MuiTable'
+import MuiTable from '../tables/MuiTable'
 import {getStaticData} from '../../reducers/dataReducer'
 
 export default function HomePage() {

@@ -39,7 +39,6 @@ export default function TablePaginationActions(props) {
 
   return (
     <div className={classes.root}>
-      {console.log(props)}
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}

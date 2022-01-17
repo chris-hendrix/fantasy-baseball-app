@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import MuiTable from '../MuiTable'
+import MuiTable from '../tables/MuiTable'
 import {getDraftData} from '../../reducers/dataReducer'
 import {Typography} from '@material-ui/core'
 
@@ -10,6 +10,11 @@ export default function HomePage() {
   const draftTableData = useSelector(state => state.data.draft.Draft)
   const playerTableData = useSelector(state => state.data.draft.Players)
   const ownerDraftTableData = useSelector(state => state.data.draft.OwnerDraft)
+
+  const draftTableFilters = {
+    Name: 'DefaultColumnFilter'
+  }
+
   const dispatch = useDispatch()
   useEffect(() => dispatch(getDraftData()), [dispatch])
   return (
@@ -21,7 +26,9 @@ export default function HomePage() {
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h6">Draft Board</Typography>
-          {draftTableData && <MuiTable defaultPageSize={220} {...draftTableData} />}
+          {draftTableData && (
+            <MuiTable defaultPageSize={220} filterMap={draftTableFilters} {...draftTableData} />
+          )}
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h6">Player Pool</Typography>
