@@ -15,7 +15,7 @@ import {
 import TablePaginationActions from './TablePaginationActions'
 import {FilterTypes, DefaultColumnFilter} from './TableFilters'
 
-const StyledTableHeaderCell = styled(TableCell)(({theme}) => ({
+const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white
@@ -100,13 +100,13 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
     <Table size="small" padding="none" {...getTableProps()}>
       <TableHead>
         {headerGroups.map(headerGroup => (
-          <TableRow {...headerGroup.getHeaderGroupProps()}>
+          <TableRow style={{verticalAlign: 'top'}}{...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <StyledTableHeaderCell style={{ verticalAlign: 'top' }} {...column.getHeaderProps(column.getSortByToggleProps())}>
+              <StyledTableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
                 <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                 <div>{column.canFilter ? column.render('Filter') : null}</div>
-              </StyledTableHeaderCell>
+              </StyledTableCell>
             ))}
           </TableRow>
         ))}

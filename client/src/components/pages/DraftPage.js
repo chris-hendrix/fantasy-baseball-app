@@ -4,21 +4,12 @@ import {Typography} from '@material-ui/core'
 import {Box, Grid} from '@mui/material'
 
 import MuiTable from '../tables/MuiTable'
-import {DefaultColumnFilter, SelectColumnFilter, PositionColumnFilter, RoundColumnFilter} from '../tables/TableFilters'
+import {defaultColumnOptions} from '../tables/TableFilters'
 
 export default function DraftPage() {
   const draftTableData = useSelector(state => state.data.draft.Draft)
   const playerTableData = useSelector(state => state.data.draft.Players)
   const ownerDraftTableData = useSelector(state => state.data.draft.OwnerDraft)
-
-  const playerColumnOptions = {
-    Name: {Filter: DefaultColumnFilter, disableSortBy: true},
-    Team: {Filter: SelectColumnFilter, disableSortBy: true},
-    Owner: {Filter: SelectColumnFilter, disableSortBy: true},
-    Pos: {Filter: PositionColumnFilter, disableSortBy: true},
-    ADP: {Filter: RoundColumnFilter, disableSortBy: true},
-    Pick: {Filter: RoundColumnFilter, disableSortBy: true}
-  }
 
   return (
     <Box sx={{width: '100%'}}>
@@ -32,7 +23,7 @@ export default function DraftPage() {
           {draftTableData && (
             <MuiTable
               defaultPageSize={220}
-              columnOptions={playerColumnOptions}
+              columnOptions={defaultColumnOptions}
               {...draftTableData}
             />
           )}
@@ -42,7 +33,7 @@ export default function DraftPage() {
           {playerTableData && (
             <MuiTable
               defaultPageSize={220}
-              columnOptions={playerColumnOptions}
+              columnOptions={defaultColumnOptions}
               {...playerTableData}
             />
           )}
