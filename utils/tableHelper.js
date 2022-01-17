@@ -28,6 +28,7 @@ const getColumn = header => {
     Header: header,
     accessor: getAccessor(header),
     show: true,
+    disableFilters: true,
     option: ''
   }
   if (header.includes(' - ')) [column.Header, column.option] = header.split(' - ')

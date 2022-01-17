@@ -12,10 +12,8 @@ import {
   TableRow
 } from '@mui/material'
 
-
-
 import TablePaginationActions from './TablePaginationActions'
-import TableFilters from './TableFilters'
+import {FilterTypes, DefaultColumnFilter} from './TableFilters'
 
 const StyledTableHeaderCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,29 +46,30 @@ const addHyperlinksToColumns = columns => {
   })
 }
 
-const addFiltersToColumns = (columns, filterMap) => {
-  if (!filterMap) return
+const addColumnOptions = (columns, columnOptions) => {
+  if (!columnOptions) return
   columns.forEach(column => {
-    if (column.Header in filterMap) {
-      const filterName = filterMap[column.Header]
-      column.Filter = TableFilters[filterName]
+    if (column.Header in columnOptions) {
+      Object.assign(column, columnOptions[column.Header])
+      column.disableFilters = typeof column.Filter === 'undefined'
       console.log(column)
     }
   })
 }
 
-export default function MuiTable({columns, data, defaultPageSize, filterMap}) {
+export default function MuiTable({columns, data, defaultPageSize, columnOptions}) {
   addHyperlinksToColumns(columns)
-  addFiltersToColumns(columns, filterMap)
+  addColumnOptions(columns, columnOptions)
 
-  const filterTypes = useMemo(()=>(TableFilters.filterTypes),[])
+  const filterTypes = useMemo(()=>(FilterTypes),[])
 
   const defaultColumn = useMemo(
     () => ({
-      Filter: TableFilters.DefaultColumnFilter
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
     }),
     []
-  )
+  )  
 
   // Use the state and functions returned from useTable to build your UI
   const {
