@@ -1,12 +1,14 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import {List, ListItem, ListItemText, ListItemIcon} from '@mui/material'
+import {List, ListItem, ListItemText, ListItemAvatar, ListItemIcon} from '@mui/material'
 import {Card, CardContent, CardHeader, Typography} from '@mui/material'
 import {Avatar} from '@mui/material'
 import {EmojiEvents} from '@mui/icons-material'
+import {PRIMARY_COLOR, SECONDARY_COLOR} from '../../theme'
 
 export default function HomePage() {
   const leagueWinnerData = useSelector(state => {
+    if (!state.data.static.SeasonStats) return
     const seasonStats = state.data.static.SeasonStats.data
     return seasonStats && seasonStats.filter(row => row['playrnk'] === '1')
   })
@@ -15,34 +17,20 @@ export default function HomePage() {
     const {year, owner, wins, losses, ties} = row
     const info = `${owner} (${wins}-${losses}-${ties})`
     return (
-      <Card sx={{minWidth: 275, maxWidth: 345}}>
-        <CardHeader
-          avatar={<Avatar aria-label="recipe"><EmojiEvents/></Avatar>}
-          title={year}
-        />
-        <CardContent>
-          <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="div">
-            Test
-          </Typography>
-          <Typography sx={{mb: 1.5}} color="text.secondary">
-            adjective
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-      </Card>
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar sx={{bgcolor: PRIMARY_COLOR}} aria-label="recipe">
+            {`'` + year.slice(-2)}
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={'🥇 ' + info} secondary={'🥈 ' + info} />
+      </ListItem>
     )
   }
 
   const leagueWinnerList = () => (
-    <List dense={true}>
-      {leagueWinnerData.map(row => leagueWinnerCard(row))}
+    <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+      {leagueWinnerData && leagueWinnerData.map(row => leagueWinnerCard(row))}
     </List>
   )
   return <div>{leagueWinnerData && leagueWinnerList()}</div>
