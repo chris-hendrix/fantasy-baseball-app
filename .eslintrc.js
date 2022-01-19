@@ -3,14 +3,12 @@ module.exports = {
     node: true,
     commonjs: true,
     es2021: true,
-    jest: true,
-    'cypress/globals': true,
   },
-  extends: ['airbnb', 'standard', 'eslint:recommended', 'plugin:cypress/recommended'],
+  extends: ['airbnb', 'standard'],
   parserOptions: {
     ecmaVersion: 2017,
   },
-  plugins: ['react', 'jest', 'cypress'],
+  plugins: ['react'],
   rules: {
     'max-len': 0,
     'no-plusplus': [
@@ -37,4 +35,4 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'comma-dangle': 0
   }
-};
+}

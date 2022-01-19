@@ -9,11 +9,11 @@ const tableHelper = require('./utils/tableHelper')
 const sheetNames = ['Draft']
 sheetHelper
   .getSheetData(config.DOC_ID, config.CLIENT_EMAIL, config.PRIVATE_KEY, sheetNames)
-  .then(sheetData => {
-    const {headers, rows} = sheetData[sheetNames[0]]
+  .then((sheetData) => {
+    const { headers, rows } = sheetData[sheetNames[0]]
     console.log(`'${sheetNames[0]}' header and first row`)
-    const {columns, data} = tableHelper.getTableData(headers, rows)
+    const { columns, data } = tableHelper.getTableData(headers, rows)
     console.log(columns)
     console.log(data[0])
   })
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err))

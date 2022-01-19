@@ -38,5 +38,5 @@ const clearCache = () => {
   window.localStorage.removeItem(CACHE_DATE_KEY)
 }
 
-const dataService = {getDraftData, getStaticData, clearCache}
+const dataService = { getDraftData, getStaticData, clearCache }
 export default dataService

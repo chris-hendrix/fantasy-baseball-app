@@ -1,9 +1,9 @@
 require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
-const DOC_ID = process.env.DOC_ID
-const NODE_ENV = process.env.NODE_ENV
-const CLIENT_EMAIL = process.env.CLIENT_EMAIL
+const { DOC_ID } = process.env
+const { NODE_ENV } = process.env
+const { CLIENT_EMAIL } = process.env
 const PRIVATE_KEY = process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
 
 module.exports = {

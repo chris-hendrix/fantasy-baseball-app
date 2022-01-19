@@ -12,10 +12,10 @@ const initialState = {
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DRAFT_DATA: {
-      return {...state, draft: action.data}
+      return { ...state, draft: action.data }
     }
     case GET_STATIC_DATA: {
-      return {...state, static: action.data}
+      return { ...state, static: action.data }
     }
     case CLEAR_CACHE: {
       return state
@@ -28,17 +28,17 @@ const dataReducer = (state = initialState, action) => {
 
 export const getDraftData = () => async (dispatch) => {
   const draftData = await dataService.getDraftData()
-  dispatch({type: GET_DRAFT_DATA, data: draftData})
+  dispatch({ type: GET_DRAFT_DATA, data: draftData })
 }
 
 export const getStaticData = () => async (dispatch) => {
   const staticData = await dataService.getStaticData()
-  dispatch({type: GET_STATIC_DATA, data: staticData})
+  dispatch({ type: GET_STATIC_DATA, data: staticData })
 }
 
-export const clearCache = () => dispatch =>{
+export const clearCache = () => dispatch => {
   dataService.clearCache()
-  dispatch({type: CLEAR_CACHE})
+  dispatch({ type: CLEAR_CACHE })
 }
 
 

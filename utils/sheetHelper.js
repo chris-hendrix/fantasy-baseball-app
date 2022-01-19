@@ -13,13 +13,13 @@ const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) =
   const sheetData = {}
   const sheetTitles = sheetNames || Object.keys(doc.sheetsByTitle)
   for (const sheetTitle of sheetTitles) {
-    let sheet = doc.sheetsByTitle[sheetTitle]
+    const sheet = doc.sheetsByTitle[sheetTitle]
     await sheet.loadHeaderRow()
     try {
-      let rows = await sheet.getRows({offset: 0})
-      rows = rows.map(row => row._rawData)
-      let headers = sheet.headerValues
-      sheetData[sheetTitle] = {headers, rows}
+      let rows = await sheet.getRows({ offset: 0 })
+      rows = rows.map((row) => row._rawData)
+      const headers = sheet.headerValues
+      sheetData[sheetTitle] = { headers, rows }
     } catch (error) {
       console.log(`error for sheet ${sheetTitle}`)
       console.log(error)
@@ -28,4 +28,4 @@ const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) =
   return sheetData
 }
 
-module.exports = {getSheetData}
+module.exports = { getSheetData }

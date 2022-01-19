@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react'
-import {usePagination, useTable, useSortBy, useFilters} from 'react-table'
-import {styled} from '@mui/material/styles'
-import {tableCellClasses} from '@mui/material/TableCell'
+import React, { useMemo } from 'react'
+import { usePagination, useTable, useSortBy, useFilters } from 'react-table'
+import { styled } from '@mui/material/styles'
+import { tableCellClasses } from '@mui/material/TableCell'
 import {
   Table,
   TableBody,
@@ -13,9 +13,9 @@ import {
 } from '@mui/material'
 
 import TablePaginationActions from './TablePaginationActions'
-import {FilterTypes, DefaultColumnFilter} from './TableFilters'
+import { FilterTypes, DefaultColumnFilter } from './TableFilters'
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white
@@ -25,7 +25,7 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
   }
 }))
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover
   },
@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const addHyperlinksToColumns = columns => {
   columns.forEach(column => {
     if (!column.linkAccessor) return
-    column.Cell = ({row}) => (
+    column.Cell = ({ row }) => (
       <a href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
         {row.original[column.accessor]}
       </a>
@@ -56,11 +56,11 @@ const addColumnOptions = (columns, columnOptions) => {
   })
 }
 
-export default function MuiTable({columns, data, defaultPageSize, columnOptions}) {
+export default function MuiTable({ columns, data, defaultPageSize, columnOptions }) {
   addHyperlinksToColumns(columns)
   addColumnOptions(columns, columnOptions)
 
-  const filterTypes = useMemo(()=>(FilterTypes),[])
+  const filterTypes = useMemo(() => (FilterTypes), [])
 
   const defaultColumn = useMemo(
     () => ({
@@ -68,7 +68,7 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
       Filter: DefaultColumnFilter,
     }),
     []
-  )  
+  )
 
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -78,7 +78,7 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
     prepareRow,
     gotoPage,
     setPageSize,
-    state: {pageIndex, pageSize}
+    state: { pageIndex, pageSize }
   } = useTable(
     {
       columns,
@@ -100,7 +100,7 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
     <Table size="small" padding="none" {...getTableProps()}>
       <TableHead>
         {headerGroups.map(headerGroup => (
-          <TableRow style={{verticalAlign: 'top'}}{...headerGroup.getHeaderGroupProps()}>
+          <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
               <StyledTableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
@@ -126,14 +126,14 @@ export default function MuiTable({columns, data, defaultPageSize, columnOptions}
       <TableFooter>
         <TableRow>
           <TablePagination
-            rowsPerPageOptions={[10, 50, 100, 220, {label: 'All', value: data.length}]}
+            rowsPerPageOptions={[10, 50, 100, 220, { label: 'All', value: data.length }]}
             colSpan={8}
             count={data.length}
             rowsPerPage={pageSize}
             labelRowsPerPage={'Rows:'}
             page={pageIndex}
             SelectProps={{
-              inputProps: {'aria-label': 'rows per page'},
+              inputProps: { 'aria-label': 'rows per page' },
               native: true
             }}
             onPageChange={(event, newPage) => gotoPage(newPage)}

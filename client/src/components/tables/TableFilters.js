@@ -1,23 +1,23 @@
-import React, {useMemo} from 'react'
-import {matchSorter} from 'match-sorter'
-import {TextField, Select, MenuItem} from '@mui/material'
+import React, { useMemo } from 'react'
+import { matchSorter } from 'match-sorter'
+import { TextField, Select, MenuItem } from '@mui/material'
 
 export const defaultColumnOptions = {
-  Name: {Filter: DefaultColumnFilter, disableSortBy: true},
-  Team: {Filter: SelectColumnFilter, disableSortBy: true},
-  Owner: {Filter: SelectColumnFilter, disableSortBy: true},
-  Pos: {Filter: PositionColumnFilter, disableSortBy: true},
-  ADP: {Filter: RoundColumnFilter, disableSortBy: true},
-  Pick: {Filter: RoundColumnFilter, disableSortBy: true},
-  Year: {Filter: SelectColumnFilter, disableSortBy: true},
+  Name: { Filter: DefaultColumnFilter, disableSortBy: true },
+  Team: { Filter: SelectColumnFilter, disableSortBy: true },
+  Owner: { Filter: SelectColumnFilter, disableSortBy: true },
+  Pos: { Filter: PositionColumnFilter, disableSortBy: true },
+  ADP: { Filter: RoundColumnFilter, disableSortBy: true },
+  Pick: { Filter: RoundColumnFilter, disableSortBy: true },
+  Year: { Filter: SelectColumnFilter, disableSortBy: true },
 }
 
 const StyledTextField = props => (
   <TextField
     variant="standard"
-    style={{backgroundColor: 'white'}}
+    style={{ backgroundColor: 'white' }}
     placeholder={`Search...`}
-    inputProps={{style: {fontSize: 12}}}
+    inputProps={{ style: { fontSize: 12 } }}
     {...props}
   />
 )
@@ -25,7 +25,7 @@ const StyledTextField = props => (
 const StyledSelect = props => (
   <Select
     defaultValue=""
-    style={{backgroundColor: 'white', maxHeight: 20, fontSize: 12}}
+    style={{ backgroundColor: 'white', maxHeight: 20, fontSize: 12 }}
     {...props}
   >
     <MenuItem value="">All</MenuItem>
@@ -37,7 +37,7 @@ const StyledSelect = props => (
   </Select>
 )
 
-export function DefaultColumnFilter({column: {filterValue, preFilteredRows, setFilter}}) {
+export function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
   return (
     <StyledTextField
       value={filterValue || ''}
@@ -48,7 +48,7 @@ export function DefaultColumnFilter({column: {filterValue, preFilteredRows, setF
   )
 }
 
-export function SelectColumnFilter({column: {filterValue, setFilter, preFilteredRows, id}}) {
+export function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = useMemo(() => {
     const options = new Set()
     preFilteredRows.forEach(row => {
@@ -67,7 +67,7 @@ export function SelectColumnFilter({column: {filterValue, setFilter, preFiltered
   )
 }
 
-export function PositionColumnFilter({column: {filterValue, setFilter, preFilteredRows, id}}) {
+export function PositionColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = ['C', '1B', '2B', '3B', 'SS', 'OF', 'DH', 'SP', 'RP']
   return (
     <StyledSelect
@@ -78,7 +78,7 @@ export function PositionColumnFilter({column: {filterValue, setFilter, preFilter
   )
 }
 
-export function RoundColumnFilter({column: {filterValue, setFilter, preFilteredRows, id}}) {
+export function RoundColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = () => {
     const rounds = []
     for (var i = 1; i < 24; i++) {
@@ -101,7 +101,7 @@ export function RoundColumnFilter({column: {filterValue, setFilter, preFilteredR
 }
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
-  return matchSorter(rows, filterValue, {keys: [row => row.values[id]]})
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
 }
 
 // Let the table remove the filter if the string is empty
