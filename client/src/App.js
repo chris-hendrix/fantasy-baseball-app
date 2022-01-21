@@ -11,7 +11,8 @@ import HistoryPage from './components/pages/HistoryPage'
 import RulePage from './components/pages/RulePage'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { getStaticData, getDraftData, clearCache } from './reducers/dataReducer'
+import { getStaticData, getDraftData } from './reducers/dataReducer'
+import { getRules } from './reducers/rulesReducer'
 
 import { useInterval } from './hooks/useInterval'
 
@@ -29,6 +30,7 @@ export default function App() {
   useEffect(() => {
     dispatch(getStaticData())
     dispatch(getDraftData())
+    dispatch(getRules())
   }, [dispatch])
 
   // update draft tables on interval if on draft page
