@@ -1,16 +1,23 @@
 import { createTheme } from '@mui/material'
 import { grey, red } from '@mui/material/colors'
+import "@fontsource/roboto"
 
-export const PRIMARY_COLOR = red[800]
-export const SECONDARY_COLOR = grey[800]
+export const RED = red[800]
+export const GREY = grey[800]
 
 const theme = createTheme({
   palette: {
-    secondary: { main: PRIMARY_COLOR },
-    primary: { main: SECONDARY_COLOR }
+    secondary: { main: RED },
+    primary: { main: GREY }
   },
   typography: {
-    fontFamily: ['"Lato"', 'sans-serif'].join(',')
+    allVariants: {
+      fontFamily: ['roboto', 'sans-serif'].join(',')
+    },
+    h4: { margin: 15 },
+    h5: { marginTop: 15 },
+    h6: { marginTop: 8, color: RED, fontSize: '1.1rem' },
+    ul: { marginTop: 0 }
   }
 })
 

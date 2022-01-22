@@ -1,4 +1,3 @@
-import './App.css'
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 

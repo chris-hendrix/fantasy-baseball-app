@@ -9,7 +9,7 @@ export default function Navigation() {
       <Toolbar>
         <img src="img/mit-logo.svg" alt="logo" style={{ maxWidth: 50, paddingRight: 10 }} />
         <Typography
-          variant="h6"
+          variant="subtitle1"
           noWrap
           component="div"
           sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}

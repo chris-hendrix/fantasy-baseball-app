@@ -4,16 +4,6 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { Typography, List, ListItem } from '@mui/material'
 
 export default function RulePage () {
-  const markdown = `Just a link: https://reactjs.com.`
-
-  function MarkdownParagraph (props) {
-    console.log(props)
-    return <Typography>{props.children}</Typography>
-  }
-
-  const renderers = {
-    text: MarkdownParagraph
-  }
   const components = {
     h1: props => <Typography variant='h4'>{props.children}</Typography>,
     h2: props => <Typography variant='h5'>{props.children}</Typography>,

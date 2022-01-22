@@ -4,7 +4,7 @@ import { List, ListItem, ListItemText, ListItemAvatar, ListItemIcon } from '@mui
 import { Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Avatar } from '@mui/material'
 import { EmojiEvents } from '@mui/icons-material'
-import { PRIMARY_COLOR, SECONDARY_COLOR } from '../../theme'
+import { RED, GREY } from '../../theme'
 
 export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
@@ -25,7 +25,7 @@ export default function HomePage () {
     return (
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar sx={{ bgcolor: PRIMARY_COLOR }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: RED }} aria-label="recipe">
             {`'` + year.slice(-2)}
           </Avatar>
         </ListItemAvatar>
