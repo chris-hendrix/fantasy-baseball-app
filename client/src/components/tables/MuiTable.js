@@ -11,14 +11,14 @@ import {
   TablePagination,
   TableRow
 } from '@mui/material'
-
+import { useTheme } from '@mui/styles'
 import TablePaginationActions from './TablePaginationActions'
 import { FilterTypes, DefaultColumnFilter } from './TableFilters'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14
@@ -60,6 +60,7 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
   addHyperlinksToColumns(columns)
   addColumnOptions(columns, columnOptions)
 
+  const theme = useTheme()
   const filterTypes = useMemo(() => (FilterTypes), [])
 
   const defaultColumn = useMemo(
@@ -102,7 +103,7 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
         {headerGroups.map(headerGroup => (
           <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <StyledTableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+              <StyledTableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render('Header')}
                 <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                 <div>{column.canFilter ? column.render('Filter') : null}</div>
