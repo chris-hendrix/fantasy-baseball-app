@@ -21,6 +21,7 @@ export default function RulePage () {
     h3: props => <Typography variant='h6'>{props.children}</Typography>,
     li: props => <li><Typography>{props.children}</Typography></li>,
     ul: props => <ul>{props.children}</ul>,
+    ol: props => <ol>{props.children}</ol>,
     p: props => <Typography>{props.children}</Typography>
   }
 
