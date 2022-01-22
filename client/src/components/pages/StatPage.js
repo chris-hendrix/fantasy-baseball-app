@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import MuiTable from '../tables/MuiTable'
-import { getStaticData, clearCache } from '../../reducers/dataReducer'
 import { SelectColumnFilter } from '../tables/TableFilters'
 
-export default function HomePage() {
+export default function StatPage () {
   const seasonStatsTableData = useSelector(state => state.data.static.SeasonStats)
 
   const seasonStatColumnOptions = {

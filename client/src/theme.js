@@ -1,5 +1,5 @@
-import { createTheme } from '@material-ui/core/styles'
-import { grey, red } from '@material-ui/core/colors'
+import { createTheme } from '@mui/material'
+import { grey, red } from '@mui/material/colors'
 
 export const PRIMARY_COLOR = red[800]
 export const SECONDARY_COLOR = grey[800]

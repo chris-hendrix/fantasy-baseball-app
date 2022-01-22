@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material'
 import { EmojiEvents } from '@mui/icons-material'
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../../theme'
 
-export default function HomePage() {
+export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
     if (!state.data.static.SeasonStats) return
     const seasonStats = state.data.static.SeasonStats.data
@@ -37,9 +37,9 @@ export default function HomePage() {
   const leagueWinnerList = () => {
     const years = [...new Set(leagueWinnerData.map(row => row.year))]
     return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {leagueWinnerData && years.map(year => leagueWinnerCard(year))}
-    </List>
+      </List>
     )
   }
   return <div>{leagueWinnerData && leagueWinnerList()}</div>

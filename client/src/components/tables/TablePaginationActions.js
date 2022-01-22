@@ -1,24 +1,15 @@
 import React from 'react'
+import theme from '../../theme'
 import {
   FirstPage,
   KeyboardArrowLeft,
   KeyboardArrowRight,
   LastPage
-} from '@material-ui/icons'
-import { IconButton } from '@material-ui/core'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+} from '@mui/icons-material'
+import { IconButton, styled } from '@mui/material'
 import PropTypes from 'prop-types'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexShrink: 0,
-    marginLeft: theme.spacing(2.5)
-  }
-}))
-
-export default function TablePaginationActions(props) {
-  const classes = useStyles()
-  const theme = useTheme()
+export default function TablePaginationActions (props) {
   const { count, page, rowsPerPage, onPageChange } = props
 
   const handleFirstPageButtonClick = event => {
@@ -37,8 +28,10 @@ export default function TablePaginationActions(props) {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
   }
 
+  const StyledDiv = styled('div')({ flexShrink: 0, marginLeft: theme.spacing(2.5) })
+
   return (
-    <div className={classes.root}>
+    <StyledDiv>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
@@ -63,7 +56,7 @@ export default function TablePaginationActions(props) {
       >
         {theme.direction === 'rtl' ? <FirstPage /> : <LastPage />}
       </IconButton>
-    </div>
+    </StyledDiv>
   )
 }
 

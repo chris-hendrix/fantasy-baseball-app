@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import remarkGfm from 'remark-gfm'
-import { Typography, List, ListItem } from '@material-ui/core'
+import { Typography, List, ListItem } from '@mui/material'
 
 export default function RulePage () {
   const markdown = `Just a link: https://reactjs.com.`

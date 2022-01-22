@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Typography } from '@material-ui/core'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 
 import MuiTable from '../tables/MuiTable'
 import { defaultColumnOptions } from '../tables/TableFilters'

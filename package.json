@@ -8,7 +8,9 @@
     "server": "NODE_ENV=development nodemon index.js",
     "client": "npm start --prefix ./client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install:client": "npm install --prefix ./client",
+    "install:all": "npm install && npm run install:client"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,6 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^12.0.3",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-base": "^15.0.0",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
     "google-spreadsheet": "^3.2.0"
@@ -33,15 +33,6 @@
   "devDependencies": {
     "concurrently": "^7.0.0",
     "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-import-resolver-webpack": "^0.13.1",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.26.0",
     "nodemon": "^2.0.15"
   }
 }

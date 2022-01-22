@@ -1,6 +1,6 @@
 import './App.css'
 import React, { useEffect } from 'react'
-import { Routes, Route, useRouteMatch, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
 import HomePage from './components/pages/HomePage'
@@ -10,14 +10,13 @@ import StatPage from './components/pages/StatPage'
 import HistoryPage from './components/pages/HistoryPage'
 import RulePage from './components/pages/RulePage'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getStaticData, getDraftData } from './reducers/dataReducer'
 import { getRules } from './reducers/rulesReducer'
 
 import { useInterval } from './hooks/useInterval'
 
-import { Container } from '@material-ui/core'
-import { ThemeProvider } from '@material-ui/styles'
+import { Container, ThemeProvider } from '@mui/material'
 import theme from './theme'
 
 const DRAFT_UPDATE_INTERVAL = 10000

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { usePagination, useTable, useSortBy, useFilters } from 'react-table'
-import { styled } from '@mui/material/styles'
 import { tableCellClasses } from '@mui/material/TableCell'
 import {
+  styled,
   Table,
   TableBody,
   TableCell,

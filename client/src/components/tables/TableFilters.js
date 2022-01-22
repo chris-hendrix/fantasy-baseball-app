@@ -9,7 +9,7 @@ export const defaultColumnOptions = {
   Pos: { Filter: PositionColumnFilter, disableSortBy: true },
   ADP: { Filter: RoundColumnFilter, disableSortBy: true },
   Pick: { Filter: RoundColumnFilter, disableSortBy: true },
-  Year: { Filter: SelectColumnFilter, disableSortBy: true },
+  Year: { Filter: SelectColumnFilter, disableSortBy: true }
 }
 
 const StyledTextField = props => (
@@ -37,7 +37,7 @@ const StyledSelect = props => (
   </Select>
 )
 
-export function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
+export function DefaultColumnFilter ({ column: { filterValue, preFilteredRows, setFilter } }) {
   return (
     <StyledTextField
       value={filterValue || ''}
@@ -48,7 +48,7 @@ export function DefaultColumnFilter({ column: { filterValue, preFilteredRows, se
   )
 }
 
-export function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
+export function SelectColumnFilter ({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = useMemo(() => {
     const options = new Set()
     preFilteredRows.forEach(row => {
@@ -67,7 +67,7 @@ export function SelectColumnFilter({ column: { filterValue, setFilter, preFilter
   )
 }
 
-export function PositionColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
+export function PositionColumnFilter ({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = ['C', '1B', '2B', '3B', 'SS', 'OF', 'DH', 'SP', 'RP']
   return (
     <StyledSelect
@@ -78,7 +78,7 @@ export function PositionColumnFilter({ column: { filterValue, setFilter, preFilt
   )
 }
 
-export function RoundColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }) {
+export function RoundColumnFilter ({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = () => {
     const rounds = []
     for (var i = 1; i < 24; i++) {
@@ -100,7 +100,7 @@ export function RoundColumnFilter({ column: { filterValue, setFilter, preFiltere
   )
 }
 
-function fuzzyTextFilterFn(rows, id, filterValue) {
+function fuzzyTextFilterFn (rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
 }
 
