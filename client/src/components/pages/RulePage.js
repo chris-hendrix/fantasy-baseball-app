@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import { Typography, List, ListItem } from '@mui/material'
+import { Typography } from '@mui/material'
 
 export default function RulePage () {
   const components = {

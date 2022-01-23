@@ -16,7 +16,7 @@ export default function Navigation() {
         >
           MIT Fantasy Baseball
         </Typography>
-        <Button color="secondary" component={Link} to="/">
+        <Button color="inherit" component={Link} to="/">
           Home
         </Button>
         <Button color="inherit" component={Link} to="/draft">
