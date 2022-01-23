@@ -5,7 +5,7 @@ import MuiTable from '../tables/MuiTable'
 import { SelectColumnFilter } from '../tables/TableFilters'
 
 export default function StatPage () {
-  const seasonStatsTableData = useSelector(state => state.data.static.SeasonStats)
+  const seasonStatsTableData = useSelector(state => state.static.tables.SeasonStats)
 
   const seasonStatColumnOptions = {
     Year: { Filter: SelectColumnFilter, disableSortBy: true },

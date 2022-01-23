@@ -7,7 +7,6 @@ const initialState = { rules: '' }
 const rulesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RULES: {
-      console.log(action)
       return { rules: action.rules }
     }
     default: {

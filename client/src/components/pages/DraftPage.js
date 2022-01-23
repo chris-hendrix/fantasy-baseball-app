@@ -6,9 +6,9 @@ import MuiTable from '../tables/MuiTable'
 import { defaultColumnOptions } from '../tables/TableFilters'
 
 export default function DraftPage() {
-  const draftTableData = useSelector(state => state.data.draft.Draft)
-  const playerTableData = useSelector(state => state.data.draft.Players)
-  const ownerDraftTableData = useSelector(state => state.data.draft.OwnerDraft)
+  const draftTableData = useSelector(state => state.draft.tables.Draft)
+  const playerTableData = useSelector(state => state.draft.tables.Players)
+  const ownerDraftTableData = useSelector(state => state.draft.tables.OwnerDraft)
 
   return (
     <Box sx={{ width: '100%' }}>

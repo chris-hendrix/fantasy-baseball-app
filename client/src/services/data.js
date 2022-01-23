@@ -5,12 +5,12 @@ const STATIC_DATA_KEY = 'staticData'
 const CACHE_DATE_KEY = 'cacheDate'
 const MAX_CACHE_DAYS = 30
 
-const getDraftData = async () => {
+const getDraftTables = async () => {
   const response = await axios.get(`${baseUrl}/draft`)
   return response.data
 }
 
-const getStaticData = async () => {
+const getStaticTables = async () => {
   // try to get data from cache
   const localDataString = window.localStorage.getItem(STATIC_DATA_KEY)
   const cacheDateString = window.localStorage.getItem(CACHE_DATE_KEY)
@@ -38,5 +38,5 @@ const clearCache = () => {
   window.localStorage.removeItem(CACHE_DATE_KEY)
 }
 
-const dataService = { getDraftData, getStaticData, clearCache }
+const dataService = { getDraftTables, getStaticTables, clearCache }
 export default dataService

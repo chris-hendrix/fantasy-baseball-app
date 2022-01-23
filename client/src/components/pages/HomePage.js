@@ -7,8 +7,9 @@ import theme from '../../theme'
 
 export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
-    if (!state.data.static.SeasonStats) return
-    const seasonStats = state.data.static.SeasonStats.data
+    console.log(state)
+    if (!state.static.tables.SeasonStats) return
+    const seasonStats = state.static.tables.SeasonStats.data
     return seasonStats && seasonStats.filter(row => row['playrnk'] === '1')
   })
 
@@ -16,8 +17,22 @@ export default function HomePage () {
     if (!leagueWinnerData) return
     console.log(leagueWinnerData.slice(-1)[0])
     const { year, owner } = leagueWinnerData.slice(-1)[0]
-    console.log(ownerImages)
-    return { info: `${year} Champion: ${owner}`, img: ownerImages[owner] }
+    const [info, img] = [`${year} Champion: ${owner}`, ownerImages[owner]]
+    return (
+      <Grid item xs={6} justifyContent='center'>
+        <Typography variant="h5" align='center'>{info}</Typography>
+        <Paper
+          style={{
+            borderRadius: '10%',
+            backgroundImage: `url(${img})`,
+            backgroundSize: 600,
+            width: 600,
+            height: 600
+          }}
+        >
+        </Paper>
+      </Grid>
+    )
   }
 
   return (
@@ -27,19 +42,7 @@ export default function HomePage () {
         <Grid item xs={12}>
           <Rafters />
         </Grid>
-        <Grid item xs={6} justifyContent='center'>
-          <Typography variant="h5" align='center'>{lastWinner().info}</Typography>
-          <Paper
-          style={{
-              borderRadius: '10%',
-              backgroundImage: `url(${lastWinner().img})`,
-              backgroundSize: 600,
-              width: 600,
-              height: 600
-          }}
-          >
-          </Paper>
-        </Grid>
+        {lastWinner()}
       </Grid>
     </Box>
   )

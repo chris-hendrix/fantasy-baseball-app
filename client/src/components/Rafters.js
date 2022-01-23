@@ -6,8 +6,8 @@ import theme from '../theme'
 
 export default function Rafters () {
   const leagueWinnerData = useSelector(state => {
-    if (!state.data.static.SeasonStats) return
-    const seasonStats = state.data.static.SeasonStats.data
+    if (!state.static.tables.SeasonStats) return
+    const seasonStats = state.static.tables.SeasonStats.data
     return seasonStats && seasonStats.filter(row => row['playrnk'] === '1')
   })
   const leagueWinnerBanner = row => {
