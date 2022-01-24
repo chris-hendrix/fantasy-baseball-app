@@ -12,7 +12,7 @@ const theme = createTheme({
   },
   typography: {
     allVariants: {
-      fontFamily: ['roboto', 'sans-serif'].join(',')
+      fontFamily: ['roboto', 'sans-serif'].join(','),
     },
     h4: { margin: 15 },
     h5: { marginTop: 15 },

@@ -18,7 +18,7 @@ export default function PdfViewer ({ file }) {
   function onDocumentLoadSuccess ({ numPages }) {
     setNumPages(numPages);
   }
-  const handlePageButtonClick = e => {
+  const handleIconButtonClick = e => {
     console.log(e.currentTarget.id)
     switch (e.currentTarget.id) {
       case 'previous-page':
@@ -40,7 +40,6 @@ export default function PdfViewer ({ file }) {
       default:
         return
     }
-
   }
 
   const StyledDiv = styled('div')({ flexShrink: 0, marginLeft: theme.spacing(2.5) })
@@ -49,7 +48,7 @@ export default function PdfViewer ({ file }) {
     <StyledDiv>
       <IconButton
         id='first-page'
-        onClick={handlePageButtonClick}
+        onClick={handleIconButtonClick}
         disabled={pageNumber === 1}
         aria-label="first page"
       >
@@ -57,7 +56,7 @@ export default function PdfViewer ({ file }) {
       </IconButton>
       <IconButton
         id='previous-page'
-        onClick={handlePageButtonClick}
+        onClick={handleIconButtonClick}
         disabled={pageNumber === 1}
         aria-label="previous page"
       >
@@ -65,7 +64,7 @@ export default function PdfViewer ({ file }) {
       </IconButton>
       <IconButton
         id='next-page'
-        onClick={handlePageButtonClick}
+        onClick={handleIconButtonClick}
         disabled={pageNumber >= numPages}
         aria-label="next page"
       >
@@ -73,15 +72,15 @@ export default function PdfViewer ({ file }) {
       </IconButton>
       <IconButton
         id='last-page'
-        onClick={handlePageButtonClick}
+        onClick={handleIconButtonClick}
         disabled={pageNumber >= numPages}
         aria-label="last page"
       >
         {theme.direction === 'rtl' ? <FirstPage /> : <LastPage />}
       </IconButton>
       <IconButton><Typography>Page {pageNumber} of {numPages}</Typography></IconButton>
-      <IconButton>
-        <Download color='secondary' />
+      <IconButton color='secondary' href={file} download >
+        <Download />
       </IconButton>
     </StyledDiv>
   )

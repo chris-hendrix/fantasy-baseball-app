@@ -14,7 +14,7 @@ import { getDraftTables } from './reducers/draftDataReducer'
 import { getStaticTables } from './reducers/staticDataReducer'
 import { getRules } from './reducers/rulesReducer'
 
-import { useInterval } from './hooks/useInterval'
+import { useInterval } from './hooks'
 
 import { Container, ThemeProvider } from '@mui/material'
 import theme from './theme'

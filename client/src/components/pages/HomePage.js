@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Box, Grid, Paper, Typography } from '@mui/material'
 import Rafters from '../Rafters'
 import ownerImages from '../../assets/images/owners'
-import theme from '../../theme'
 
 export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
@@ -15,7 +14,6 @@ export default function HomePage () {
 
   const lastWinner = () => {
     if (!leagueWinnerData) return
-    console.log(leagueWinnerData.slice(-1)[0])
     const { year, owner } = leagueWinnerData.slice(-1)[0]
     const [info, img] = [`${year} Champion: ${owner}`, ownerImages[owner]]
     return (

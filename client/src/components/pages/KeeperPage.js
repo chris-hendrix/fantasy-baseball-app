@@ -51,9 +51,9 @@ export default function KeeperPage () {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h4" align="center" >Keepers</Typography>
+      <Typography variant="h4" align="center">Keepers</Typography>
 
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={1} columnSpacing={1}>
         <Grid item xs={8}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Keepers" />
