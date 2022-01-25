@@ -3,7 +3,7 @@ const baseUrl = '/api/sheets'
 
 const STATIC_DATA_KEY = 'staticData'
 const CACHE_DATE_KEY = 'cacheDate'
-const MAX_CACHE_DAYS = 30
+// const MAX_CACHE_DAYS = 30
 
 const getDraftTables = async () => {
   const response = await axios.get(`${baseUrl}/draft`)
@@ -12,8 +12,8 @@ const getDraftTables = async () => {
 
 const getStaticTables = async () => {
   // try to get data from cache
-  const localDataString = window.localStorage.getItem(STATIC_DATA_KEY)
-  const cacheDateString = window.localStorage.getItem(CACHE_DATE_KEY)
+  // const localDataString = window.localStorage.getItem(STATIC_DATA_KEY)
+  // const cacheDateString = window.localStorage.getItem(CACHE_DATE_KEY)
   const today = new Date()
   /*
   // try to get data from cache

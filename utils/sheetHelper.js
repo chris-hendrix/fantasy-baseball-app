@@ -10,21 +10,27 @@ const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) =
   await doc.loadInfo()
 
   // get sheet data
-  const sheetData = {}
   const sheetTitles = sheetNames || Object.keys(doc.sheetsByTitle)
-  for (const sheetTitle of sheetTitles) {
+  const sheetPromises = []
+  sheetTitles.forEach((sheetTitle) => {
     const sheet = doc.sheetsByTitle[sheetTitle]
-    await sheet.loadHeaderRow()
-    try {
-      let rows = await sheet.getRows({ offset: 0 })
-      rows = rows.map((row) => row._rawData)
-      const headers = sheet.headerValues
-      sheetData[sheetTitle] = { headers, rows }
-    } catch (error) {
-      console.log(`error for sheet ${sheetTitle}`)
-      console.log(error)
-    }
-  }
+    sheetPromises.push(
+      sheet.loadHeaderRow()
+        .then(() => sheet.getRows({ offset: 0 }))
+        .then((rowObjects) => {
+          /* eslint no-underscore-dangle: "off" */
+          const rows = rowObjects.map((row) => row._rawData)
+          return { sheetTitle, rows, headers: sheet.headerValues }
+          /* eslint-enable */
+        })
+    )
+  })
+  const sheets = await Promise.all(sheetPromises)
+  const sheetData = {}
+  sheets.forEach((sheet) => {
+    const { sheetTitle, headers, rows } = sheet
+    sheetData[sheetTitle] = { headers, rows }
+  })
   return sheetData
 }
 

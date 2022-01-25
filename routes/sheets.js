@@ -4,7 +4,7 @@ const sheetHelper = require('../utils/sheetHelper')
 const tableHelper = require('../utils/tableHelper')
 
 sheetRouter.get('/', async (req, res) => {
-  const {headers, rows} = await sheetHelper.getSheetData(config.DOC_ID, config.CLIENT_EMAIL, config.PRIVATE_KEY)
+  const { headers, rows } = await sheetHelper.getSheetData(config.DOC_ID, config.CLIENT_EMAIL, config.PRIVATE_KEY)
   const tableData = tableHelper.getTableData(headers, rows)
   res.status(200).json(tableData)
 })
