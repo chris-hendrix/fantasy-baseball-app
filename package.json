@@ -1,0 +1,43 @@
+{
+  "name": "fantasy-baseball-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "build": "npm run build:server --prefix ./client",
+    "server": "NODE_ENV=development nodemon index.js",
+    "client": "npm start --prefix ./client",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install:client": "npm install --prefix ./client",
+    "install:all": "npm install && npm run install:client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris-hendrix/fantasy-baseball-app.git"
+  },
+  "author": "Chris Hendrix",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chris-hendrix/fantasy-baseball-app/issues"
+  },
+  "homepage": "https://github.com/chris-hendrix/fantasy-baseball-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^12.0.3",
+    "express": "^4.17.2",
+    "express-async-errors": "^3.1.1",
+    "google-spreadsheet": "^3.2.0",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-standard": "^16.0.3",
+    "nodemon": "^2.0.15"
+  }
+}

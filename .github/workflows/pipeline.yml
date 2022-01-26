@@ -1,0 +1,32 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - '**'
+    pull_request:
+      branches: [main]
+      types: [opened, synchronize]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '17.x'
+      - name: install
+        run: npm run install:all
+      - name: lint
+        run: npm run lint
+      - name: build
+        run: npm run build
+      - uses: actions/checkout@v2
+      - name: bump version
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: main
