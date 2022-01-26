@@ -17,10 +17,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '17.x'
-      - name: npm install
+      - name: install
         run: npm run install:all
       - name: lint
         run: npm run lint
+      - name: build
+        run: npm run build
       - uses: actions/checkout@v2
       - name: bump version
         if: ${{ github.event_name == 'push'  && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
