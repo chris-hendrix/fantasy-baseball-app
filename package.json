@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node index.js",
+    "build": "npm run build:server --prefix ../client",
     "server": "NODE_ENV=development nodemon index.js",
     "client": "npm start --prefix ./client",
     "lint": "eslint .",

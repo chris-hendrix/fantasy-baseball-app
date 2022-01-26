@@ -6,7 +6,6 @@ import ownerImages from '../../assets/images/owners'
 
 export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
-    console.log(state)
     if (!state.static.tables.SeasonStats) return
     const seasonStats = state.static.tables.SeasonStats.data
     return seasonStats && seasonStats.filter(row => row['playrnk'] === '1')

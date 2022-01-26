@@ -22,6 +22,12 @@ app.use('/api/sheets', sheetRouter)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'))
+  app.get('/health', (req, res) => { res.send('ok') })
+  app.get('/version', (req, res) => { res.send('0.0.0') })
+}
+
 const server = http.createServer(app)
 server.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}, NODE_ENV=${config.NODE_ENV}`)
