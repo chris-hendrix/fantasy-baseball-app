@@ -79,7 +79,7 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
     prepareRow,
     gotoPage,
     setPageSize,
-    state: { pageIndex, pageSize }
+    state: { filters, pageIndex, pageSize }
   } = useTable(
     {
       columns,
@@ -89,7 +89,11 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
       initialState: {
         pageSize: defaultPageSize || 100,
         hiddenColumns: columns.filter(col => col.show === false).map(col => col.accessor)
-      }
+      },
+      autoResetPage: false,
+      autoResetSelectedRows: false,
+      autoResetFilters: false,
+      disableMultiSort: true,
     },
     useFilters,
     useSortBy,
@@ -99,6 +103,7 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
   // Render the UI for your table
   return (
     <Table size="small" padding="none" {...getTableProps()}>
+      {console.log(filters)}
       <TableHead>
         {headerGroups.map(headerGroup => (
           <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>

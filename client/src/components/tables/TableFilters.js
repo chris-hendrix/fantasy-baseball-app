@@ -12,20 +12,43 @@ export const defaultColumnOptions = {
   Year: { Filter: SelectColumnFilter, disableSortBy: true }
 }
 
-const StyledTextField = props => (
+const TableTextField = props => (
   <TextField
+    hiddenLabel
     variant="standard"
-    style={{ backgroundColor: 'white' }}
     placeholder={`Search...`}
-    inputProps={{ style: { fontSize: 12 } }}
+    size="small"
+    color="secondary"
+    sx={{
+      backgroundColor: 'white',
+      margin: '2px',
+      borderRadius: '4px',
+      '& .MuiInput-input': {
+        padding: '5px',
+        fontSize: '12px',
+        borderRadius: '4px'
+      },
+    }}
     {...props}
   />
 )
 
-const StyledSelect = props => (
+const TableSelect = props => (
   <Select
     defaultValue=""
-    style={{ backgroundColor: 'white', maxHeight: 20, fontSize: 12 }}
+    color="secondary"
+    sx={{
+      backgroundColor: 'white',
+      margin: '2px',
+      '& .MuiSelect-select': {
+        paddingTop: '2px',
+        paddingBottom: '2px',
+        fontSize: '12px'
+      },
+      '& .MuiMenuItem-root': {
+        style: { fontSize: '12px' }
+      }
+    }}
     {...props}
   >
     <MenuItem value="">All</MenuItem>
@@ -39,7 +62,7 @@ const StyledSelect = props => (
 
 export function DefaultColumnFilter ({ column: { filterValue, preFilteredRows, setFilter } }) {
   return (
-    <StyledTextField
+    <TableTextField
       value={filterValue || ''}
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
@@ -59,7 +82,7 @@ export function SelectColumnFilter ({ column: { filterValue, setFilter, preFilte
   }, [id, preFilteredRows])
 
   return (
-    <StyledSelect
+    <TableSelect
       value={filterValue}
       onChange={e => setFilter(e.target.value || '')}
       options={options}
@@ -70,7 +93,7 @@ export function SelectColumnFilter ({ column: { filterValue, setFilter, preFilte
 export function PositionColumnFilter ({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = ['C', '1B', '2B', '3B', 'SS', 'OF', 'DH', 'SP', 'RP']
   return (
-    <StyledSelect
+    <TableSelect
       value={filterValue}
       onChange={e => setFilter(e.target.value || '')}
       options={options}
@@ -92,7 +115,7 @@ export function RoundColumnFilter ({ column: { filterValue, setFilter, preFilter
   }
 
   return (
-    <StyledSelect
+    <TableSelect
       value={filterValue}
       onChange={e => setFilter(e.target.value || '')}
       options={options()}
