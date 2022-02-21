@@ -17,4 +17,4 @@ services:
       - PORT=5000
       - DOC_ID=${DOC_ID}
       - CLIENT_EMAIL=${CLIENT_EMAIL}
-      - PRIVATE_KEY=${CLIENT_EMAIL}
+      - PRIVATE_KEY=${PRIVATE_KEY}
