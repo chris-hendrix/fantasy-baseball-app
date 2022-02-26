@@ -8,6 +8,7 @@ import App from './App'
 ReactDOM.render(
   <Provider store={store}>
     <Router>
+      {console.log(process.env.REACT_APP_EMAILJS_SERVICE_ID)}
       <App />
     </Router>
   </Provider>,
