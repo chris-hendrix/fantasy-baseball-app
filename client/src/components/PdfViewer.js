@@ -19,7 +19,6 @@ export default function PdfViewer ({ file }) {
     setNumPages(numPages);
   }
   const handleIconButtonClick = e => {
-    console.log(e.currentTarget.id)
     switch (e.currentTarget.id) {
       case 'previous-page':
         if (pageNumber === 1) break
