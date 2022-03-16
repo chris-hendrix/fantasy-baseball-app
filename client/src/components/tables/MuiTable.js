@@ -79,7 +79,7 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
     prepareRow,
     gotoPage,
     setPageSize,
-    state: { filters, pageIndex, pageSize }
+    state: { pageIndex, pageSize }
   } = useTable(
     {
       columns,
