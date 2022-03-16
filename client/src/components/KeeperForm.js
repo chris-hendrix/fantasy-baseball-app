@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { Button, Grid, TextField } from '@mui/material'
 import emailjs from '@emailjs/browser';
 import { useField } from '../hooks'
+import config from '../utils/config'
 
 export default function KeeperForm () {
   const form = useRef();
@@ -11,10 +12,10 @@ export default function KeeperForm () {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      config.EMAILJS_SERVICE_ID,
+      config.EMAILJS_TEMPLATE_ID,
       form.current,
-      process.env.REACT_APP_EMAILJS_USER_ID
+      config.EMAILJS_USER_ID
     )
     alert(`${email.value} - ${keepers.value} sent`)
     email.reset()
