@@ -1,23 +1,23 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 export default function RulePage () {
   const components = {
-    h1: props => <Typography variant='h4'>{props.children}</Typography>,
-    h2: props => <Typography variant='h5'>{props.children}</Typography>,
-    h3: props => <Typography variant='h6'>{props.children}</Typography>,
-    li: props => <li><Typography>{props.children}</Typography></li>,
-    ul: props => <ul>{props.children}</ul>,
-    ol: props => <ol>{props.children}</ol>,
-    p: props => <Typography>{props.children}</Typography>
+    h1: props => <Box typography='h4'>{props.children}</Box>,
+    h2: props => <Box typography='h5'>{props.children}</Box>,
+    h3: props => <Box typography='h6'>{props.children}</Box>,
+    li: props => <Box typography="body1"><li>{props.children}</li></Box>,
+    ul: props => <Box typography="body1"><ul>{props.children}</ul></Box>,
+    ol: props => <Box typography="body1"><ol>{props.children}</ol></Box>,
+    p: props => <Box typography="body1" sx={{ mt: 1, mb: 1 }}>{props.children}</Box>
   }
 
   const rules = useSelector(state => state.rules.rules)
   return (
-    <div style={{ textAlign: 'left' }}>
+    <Box sx={{ textAlign: 'left' }}>
       <ReactMarkdown children={rules} components={components} />
-    </div>
+    </Box>
   )
 }
