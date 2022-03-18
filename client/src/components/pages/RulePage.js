@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 
 export default function RulePage () {
   const components = {
