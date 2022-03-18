@@ -47,12 +47,12 @@ export default function App() {
       <Container className="App">
         <Navigation />
         <Routes>
-          <Route path="/" element={staticLoading ? <Spinner /> : <HomePage />} />
-          <Route path="/draft" element={draftLoading ? <Spinner /> : <DraftPage />} />
-          <Route path="/keepers" element={staticLoading ? <Spinner /> : <KeeperPage />} />
-          <Route path="/stats" element={staticLoading ? <Spinner /> : <StatPage />} />
-          <Route path="/history" element={staticLoading ? <Spinner /> : <HistoryPage />} />
-          <Route path="/rules" element={<RulePage />} />
+          <Route exact path="/" element={staticLoading ? <Spinner /> : <HomePage />} />
+          <Route exact path="/draft" element={draftLoading ? <Spinner /> : <DraftPage />} />
+          <Route exact path="/keepers" element={staticLoading ? <Spinner /> : <KeeperPage />} />
+          <Route exact path="/stats" element={staticLoading ? <Spinner /> : <StatPage />} />
+          <Route exact path="/history" element={staticLoading ? <Spinner /> : <HistoryPage />} />
+          <Route exact path="/rules" element={<RulePage />} />
         </Routes>
       </Container>
     </ThemeProvider>
