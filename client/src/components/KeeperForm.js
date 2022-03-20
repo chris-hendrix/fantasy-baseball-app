@@ -22,7 +22,7 @@ export default function KeeperForm () {
     keepers.reset()
   }
   return (
-    <form ref={form} onSubmit={handleFormSubmit}>
+    <form ref={form} onSubmit={handleFormSubmit} style={{ maxWidth: '500px', display: 'inline-block' }}>
       <Grid container rowSpacing={2}>
         <Grid item xs={12}>
           <TextField

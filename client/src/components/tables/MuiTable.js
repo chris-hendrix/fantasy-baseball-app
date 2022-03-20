@@ -3,13 +3,14 @@ import { usePagination, useTable, useSortBy, useFilters } from 'react-table'
 import { tableCellClasses } from '@mui/material/TableCell'
 import {
   styled,
+  Box,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableFooter,
   TablePagination,
-  TableRow
+  TableRow,
 } from '@mui/material'
 import { useTheme } from '@mui/styles'
 import TablePaginationActions from './TablePaginationActions'
@@ -56,7 +57,12 @@ const addColumnOptions = (columns, columnOptions) => {
   })
 }
 
-export default function MuiTable({ columns, data, defaultPageSize, columnOptions }) {
+export default function MuiTable ({
+  title,
+  columns,
+  data,
+  defaultPageSize,
+  columnOptions }) {
   addHyperlinksToColumns(columns)
   addColumnOptions(columns, columnOptions)
 
@@ -102,51 +108,54 @@ export default function MuiTable({ columns, data, defaultPageSize, columnOptions
 
   // Render the UI for your table
   return (
-    <Table size="small" padding="none" {...getTableProps()}>
-      <TableHead>
-        {headerGroups.map(headerGroup => (
-          <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <StyledTableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}
-                <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
-                <div>{column.canFilter ? column.render('Filter') : null}</div>
-              </StyledTableCell>
-            ))}
+    <Box>
+      {title && <Box typography='h6'>{title}</Box>}
+      <Table size="small" padding="none" {...getTableProps()}>
+        <TableHead>
+          {headerGroups.map(headerGroup => (
+            <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <StyledTableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableHead>
+        <TableBody>
+          {page.map((row, i) => {
+            prepareRow(row)
+            return (
+              <StyledTableRow {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
+                })}
+              </StyledTableRow>
+            )
+          })}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[10, 50, 100, 220, { label: 'All', value: data.length }]}
+              colSpan={8}
+              count={data.length}
+              rowsPerPage={pageSize}
+              labelRowsPerPage={'Rows:'}
+              page={pageIndex}
+              SelectProps={{
+                inputProps: { 'aria-label': 'rows per page' },
+                native: true
+              }}
+              onPageChange={(event, newPage) => gotoPage(newPage)}
+              onRowsPerPageChange={event => setPageSize(Number(event.target.value))}
+              ActionsComponent={TablePaginationActions}
+            />
           </TableRow>
-        ))}
-      </TableHead>
-      <TableBody>
-        {page.map((row, i) => {
-          prepareRow(row)
-          return (
-            <StyledTableRow {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
-              })}
-            </StyledTableRow>
-          )
-        })}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TablePagination
-            rowsPerPageOptions={[10, 50, 100, 220, { label: 'All', value: data.length }]}
-            colSpan={8}
-            count={data.length}
-            rowsPerPage={pageSize}
-            labelRowsPerPage={'Rows:'}
-            page={pageIndex}
-            SelectProps={{
-              inputProps: { 'aria-label': 'rows per page' },
-              native: true
-            }}
-            onPageChange={(event, newPage) => gotoPage(newPage)}
-            onRowsPerPageChange={event => setPageSize(Number(event.target.value))}
-            ActionsComponent={TablePaginationActions}
-          />
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableFooter>
+      </Table>
+    </Box>
   )
 }

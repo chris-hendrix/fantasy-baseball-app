@@ -1,6 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Grid, Tabs, Tab, Typography } from '@mui/material'
+import {
+  Accordion, AccordionDetails, AccordionSummary,
+  Box, Tabs, Tab
+} from '@mui/material'
+import PageHeader from '../PageHeader'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import MuiTable from '../tables/MuiTable'
 import { defaultColumnOptions } from '../tables/TableFilters'
@@ -50,55 +55,51 @@ export default function KeeperPage () {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Typography variant="h4" align="center">Keepers</Typography>
-
-      <Grid container rowSpacing={1} columnSpacing={1}>
-        <Grid item xs={8}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ width: '75%', display: 'block', justifyContent: 'center', justifyItems: 'center' }}>
+        <PageHeader>Keepers</PageHeader>
+        <Box sx={{ width: '100%', textAlign: 'center', pt: 1 }}>
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}            >
+              <Box typography="h6">Keeper Entry</Box>
+            </AccordionSummary>
+            <AccordionDetails><KeeperForm /></AccordionDetails>
+          </Accordion>
+        </Box>
+        <Box sx={{ mt: 1 }}>
+          <Tabs value={value} onChange={handleChange} centered>
             <Tab label="Keepers" />
             <Tab label="Last Year's Keepers" />
             <Tab label="Last Year's Draft" />
             <Tab label="Deadline Rosters" />
           </Tabs>
           <TabPanel value={value} index={0}>
-            {keeperTable && (
-              <MuiTable
-                defaultPageSize={220}
-                columnOptions={defaultColumnOptions}
-                {...keeperTable}
-              />
-            )}
+            <MuiTable
+              defaultPageSize={220}
+              columnOptions={defaultColumnOptions}
+              {...keeperTable}
+            />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            {keeperHistoryTable && (
-              <MuiTable
-                defaultPageSize={220}
-                columnOptions={defaultColumnOptions}
-                {...keeperHistoryTable}
-              />
-            )}
+            <MuiTable
+              defaultPageSize={220}
+              columnOptions={defaultColumnOptions}
+              {...keeperHistoryTable}
+            />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            {draftHistoryTable && (
-              <MuiTable
-                defaultPageSize={220}
-                columnOptions={defaultColumnOptions}
-                {...draftHistoryTable}
-              />
-            )}
+            <MuiTable
+              defaultPageSize={220}
+              columnOptions={defaultColumnOptions}
+              {...draftHistoryTable}
+            />
           </TabPanel>
           <TabPanel value={value} index={3}>
             <PdfViewer file={deadlineRostersFile} />
           </TabPanel>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Box height={36} />
-          <Typography variant="h6">Keeper Form</Typography>
-          <KeeperForm />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
+
   )
 }
