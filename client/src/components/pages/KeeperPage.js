@@ -4,6 +4,7 @@ import {
   Accordion, AccordionDetails, AccordionSummary,
   Box, Divider, Tabs, Tab
 } from '@mui/material'
+import PageHeader from '../PageHeader'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import MuiTable from '../tables/MuiTable'
@@ -56,8 +57,7 @@ export default function KeeperPage () {
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Box sx={{ width: '75%', display: 'block', justifyContent: 'center', justifyItems: 'center' }}>
-        <Box typography="h4" sx={{ width: '100%', textAlign: 'center' }}>Keepers</Box>
-        <Divider />
+        <PageHeader>Keepers</PageHeader>
         <Box sx={{ width: '100%', textAlign: 'center', pt: 1 }}>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}            >

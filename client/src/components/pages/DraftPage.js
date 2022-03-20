@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Divider } from '@mui/material'
 
+import PageHeader from '../PageHeader'
 import MuiTable from '../tables/MuiTable'
 import { defaultColumnOptions } from '../tables/TableFilters'
 
@@ -12,8 +13,7 @@ export default function DraftPage() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box typography="h4" sx={{ textAlign: 'center' }}>Draft</Box>
-      <Divider />
+      <PageHeader>Draft</PageHeader>
       <Box sx={{ width: '100%' }}>
         <MuiTable 
           title="Owner Draft Info"

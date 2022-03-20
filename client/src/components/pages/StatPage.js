@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
+import PageHeader from '../PageHeader'
 import MuiTable from '../tables/MuiTable'
 import { SelectColumnFilter } from '../tables/TableFilters'
 
@@ -13,7 +14,7 @@ export default function StatPage () {
   }
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h4" align="center">Stats</Typography>
+      <PageHeader >Stats</PageHeader>
       {seasonStatsTableData && (
         <MuiTable columnOptions={seasonStatColumnOptions} {...seasonStatsTableData} />
       )}
