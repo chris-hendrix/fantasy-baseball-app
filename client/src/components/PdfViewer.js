@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, IconButton, Typography, styled } from '@mui/material'
+import { Box, IconButton, Typography, styled } from '@mui/material'
 import {
   FirstPage,
   KeyboardArrowLeft,
@@ -85,19 +85,22 @@ export default function PdfViewer ({ file }) {
   )
 
   return (
-    <Grid container>
-      <Grid item height={800}>
+    <Box>
+      <Box sx={{
+        width: '100%',
+        '& .react-pdf__Page__annotations': { height: 0 }
+      }}>
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
           onLoadError={console.error}
         >
-          <Page pageNumber={pageNumber} />
+          <Page pageNumber={pageNumber} scale='1.25' />
         </Document>
-      </Grid>
-      <Grid item>
+      </Box>
+      <Box sx={{ width: '100%' }}>
         {pagination()}
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }
