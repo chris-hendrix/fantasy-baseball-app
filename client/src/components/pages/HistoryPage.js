@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 
 import PageHeader from '../PageHeader'
 import MuiTable from '../tables/MuiTable'

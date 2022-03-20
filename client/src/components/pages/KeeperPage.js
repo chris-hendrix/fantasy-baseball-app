@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import {
   Accordion, AccordionDetails, AccordionSummary,
-  Box, Divider, Tabs, Tab
+  Box, Tabs, Tab
 } from '@mui/material'
 import PageHeader from '../PageHeader'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
