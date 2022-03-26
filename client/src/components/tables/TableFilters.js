@@ -21,8 +21,9 @@ const TableTextField = props => (
     color="secondary"
     sx={{
       backgroundColor: 'white',
-      margin: '2px',
+      margin: '1px',
       borderRadius: '4px',
+      width: '90%',
       '& .MuiInput-input': {
         padding: '5px',
         fontSize: '12px',
@@ -37,16 +38,17 @@ const TableSelect = props => (
   <Select
     defaultValue=""
     color="secondary"
+    width='90%'
     sx={{
       backgroundColor: 'white',
-      margin: '2px',
+      margin: '1px',
       '& .MuiSelect-select': {
         paddingTop: '2px',
         paddingBottom: '2px',
         fontSize: '12px'
       },
-      '& .MuiMenuItem-root': {
-        style: { fontSize: '12px' }
+      '& .MuiPaper-root': {
+        fontSize: '12px' 
       }
     }}
     {...props}

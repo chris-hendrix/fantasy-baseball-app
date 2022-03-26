@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react'
 import { usePagination, useTable, useSortBy, useFilters } from 'react-table'
-import { tableCellClasses } from '@mui/material/TableCell'
 import {
-  styled,
   Box,
   Link,
   Table,
@@ -16,16 +14,6 @@ import {
 import { useTheme } from '@mui/styles'
 import TablePaginationActions from './TablePaginationActions'
 import { FilterTypes, DefaultColumnFilter } from './TableFilters'
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
-  }
-}))
 
 const formatColumns = columns => {
   columns.forEach(column => {
@@ -118,11 +106,11 @@ export default function MuiTable ({
           {headerGroups.map(headerGroup => (
             <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <StyledTableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <TableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </StyledTableCell>
+                </TableCell>
               ))}
             </TableRow>
           ))}

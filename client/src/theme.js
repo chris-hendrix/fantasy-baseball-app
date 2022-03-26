@@ -39,10 +39,13 @@ const theme = createTheme({
           paddingLeft: '2px',
           paddingRight: '2px',
           border: '1px solid',
-          borderColor: grey[300]
+          borderColor: grey[300],
+          fontsize: 14
         },
         head: {
           textAlign: 'center',
+          backgroundColor: grey[800],
+          color: 'white'
         }
       }
     },
