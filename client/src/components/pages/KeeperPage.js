@@ -75,15 +75,17 @@ export default function KeeperPage () {
           </Tabs>
           <TabPanel value={value} index={0}>
             <MuiTable
-              defaultPageSize={220}
+              defaultPageSize={50}
               columnOptions={defaultColumnOptions}
+              rowGroupSize={5}
               {...keeperTable}
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <MuiTable
-              defaultPageSize={220}
+              defaultPageSize={50}
               columnOptions={defaultColumnOptions}
+              rowGroupSize={5}
               {...keeperHistoryTable}
             />
           </TabPanel>
@@ -91,6 +93,7 @@ export default function KeeperPage () {
             <MuiTable
               defaultPageSize={220}
               columnOptions={defaultColumnOptions}
+              rowGroupSize={10}
               {...draftHistoryTable}
             />
           </TabPanel>

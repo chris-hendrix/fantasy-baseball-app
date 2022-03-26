@@ -26,16 +26,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }
 }))
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0
-  }
-}))
-
 const addHyperlinksToColumns = columns => {
   columns.forEach(column => {
     if (!column.linkAccessor) return
@@ -62,7 +52,10 @@ export default function MuiTable ({
   columns,
   data,
   defaultPageSize,
-  columnOptions }) {
+  columnOptions,
+  rowGroupSize = 1,
+  colors = ['row.main', 'row.secondary']
+}) {
   addHyperlinksToColumns(columns)
   addColumnOptions(columns, columnOptions)
 
@@ -128,11 +121,13 @@ export default function MuiTable ({
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <StyledTableRow {...row.getRowProps()}>
+              <TableRow
+                {...row.getRowProps()}
+                sx={{ backgroundColor: colors[Math.floor(i / rowGroupSize) % colors.length] }}>
                 {row.cells.map(cell => {
                   return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
                 })}
-              </StyledTableRow>
+              </TableRow>
             )
           })}
         </TableBody>

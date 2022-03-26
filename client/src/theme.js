@@ -2,13 +2,15 @@ import { createTheme } from '@mui/material'
 import { grey, red } from '@mui/material/colors'
 import "@fontsource/roboto"
 
-export const RED = red[800]
-export const GREY = grey[800]
-
 const theme = createTheme({
   palette: {
-    secondary: { main: RED },
-    primary: { main: GREY }
+    secondary: { main: red[800] },
+    primary: { main: grey[800] },
+    row: {
+      header: grey[800],
+      main: grey[0],
+      secondary: grey[200]
+    }
   },
   typography: {
     allVariants: {
@@ -16,7 +18,7 @@ const theme = createTheme({
     },
     h4: { margin: 15 },
     h5: { marginTop: 15 },
-    h6: { marginTop: 8, color: RED, fontSize: '1.1rem' },
+    h6: { marginTop: 8, color: red[800], fontSize: '1.1rem' },
     ul: { marginTop: 0 }
   }
 })
