@@ -4,6 +4,7 @@ import { tableCellClasses } from '@mui/material/TableCell'
 import {
   styled,
   Box,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -30,9 +31,9 @@ const addHyperlinksToColumns = columns => {
   columns.forEach(column => {
     if (!column.linkAccessor) return
     column.Cell = ({ row }) => (
-      <a href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
+      <Link href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
         {row.original[column.accessor]}
-      </a>
+      </Link>
     )
   })
 }
@@ -54,7 +55,7 @@ export default function MuiTable ({
   defaultPageSize,
   columnOptions,
   rowGroupSize = 1,
-  colors = ['row.main', 'row.secondary']
+  rowColors = ['row.white', 'row.grey']
 }) {
   addHyperlinksToColumns(columns)
   addColumnOptions(columns, columnOptions)
@@ -123,7 +124,7 @@ export default function MuiTable ({
             return (
               <TableRow
                 {...row.getRowProps()}
-                sx={{ backgroundColor: colors[Math.floor(i / rowGroupSize) % colors.length] }}>
+                sx={{ backgroundColor: rowColors[Math.floor(i / rowGroupSize) % rowColors.length] }}>
                 {row.cells.map(cell => {
                   return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
                 })}

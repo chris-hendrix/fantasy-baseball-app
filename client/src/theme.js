@@ -8,8 +8,9 @@ const theme = createTheme({
     primary: { main: grey[800] },
     row: {
       header: grey[800],
-      main: grey[0],
-      secondary: grey[200]
+      white: grey[0],
+      grey: grey[200],
+      red: red[50]
     }
   },
   typography: {
@@ -20,6 +21,27 @@ const theme = createTheme({
     h5: { marginTop: 15 },
     h6: { marginTop: 8, color: red[800], fontSize: '1.1rem' },
     ul: { marginTop: 0 }
+  },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          cursor: 'pointer',
+          underline: 'hover',
+          color: red[800]
+        }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          textAlign: 'center',
+        },
+        head: {
+          textAlign: 'center',
+        }
+      }
+    },
   }
 })
 
