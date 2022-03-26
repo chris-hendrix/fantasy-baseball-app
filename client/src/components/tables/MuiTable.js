@@ -27,14 +27,23 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }
 }))
 
-const addHyperlinksToColumns = columns => {
+const formatColumns = columns => {
   columns.forEach(column => {
-    if (!column.linkAccessor) return
-    column.Cell = ({ row }) => (
-      <Link href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
-        {row.original[column.accessor]}
-      </Link>
-    )
+    column.Cell = ({ row }) => {
+      const { linkAccessor, alignment } = column
+      const value = row.original[column.accessor]
+      return (
+        <Box sx={{ textAlign: alignment }}>
+          {linkAccessor ? (
+            <Link underline='hover' href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
+              {value}
+            </Link>
+          ) : (
+            <span>{value}</span>
+          )}
+        </Box>
+      )
+    }
   })
 }
 
@@ -57,7 +66,7 @@ export default function MuiTable ({
   rowGroupSize = 1,
   rowColors = ['row.white', 'row.grey']
 }) {
-  addHyperlinksToColumns(columns)
+  formatColumns(columns)
   addColumnOptions(columns, columnOptions)
 
   const theme = useTheme()

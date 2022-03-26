@@ -8,7 +8,7 @@ export default function HomePage () {
   const leagueWinnerData = useSelector(state => {
     if (!state.static.tables.SeasonStats) return
     const seasonStats = state.static.tables.SeasonStats.data
-    return seasonStats && seasonStats.filter(row => row['playrnk'] === '1')
+    return seasonStats && seasonStats.filter(row => row['playrk'] === '1')
   })
 
   const lastWinner = () => {

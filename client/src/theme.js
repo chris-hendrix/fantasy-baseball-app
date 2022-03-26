@@ -35,7 +35,11 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          textAlign: 'center',
+          textAlign: 'left',
+          paddingLeft: '2px',
+          paddingRight: '2px',
+          border: '1px solid',
+          borderColor: grey[300]
         },
         head: {
           textAlign: 'center',
