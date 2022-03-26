@@ -4,7 +4,7 @@ import "@fontsource/roboto"
 
 const theme = createTheme({
   palette: {
-    secondary: { main: red[800] },
+    secondary: { main: red[800], light: red[500] },
     primary: { main: grey[800] },
     row: {
       header: grey[800],
