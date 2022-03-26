@@ -22,11 +22,22 @@ import theme from './theme'
 
 const DRAFT_UPDATE_INTERVAL = 10000
 
+
+
 export default function App() {
   const dispatch = useDispatch()
   const location = useLocation()
   const staticLoading = useSelector(state => state.static.loading)
   const draftLoading = useSelector(state => state.draft.loading)
+
+  const pages = [
+    { path: '/', name: 'Home', component: <HomePage />, loading: staticLoading },
+    { path: '/draft', name: 'Draft', component: <DraftPage />, loading: draftLoading },
+    { path: '/keepers', name: 'Keepers', component: <KeeperPage />, loading: staticLoading },
+    { path: '/stats', name: 'Stats', component: <StatPage />, loading: staticLoading },
+    { path: '/history', name: 'History', component: <HistoryPage />, loading: staticLoading },
+    { path: '/rules', name: 'Rules', component: <RulePage />, loading: false },
+  ]
 
   // load data on first load
   useEffect(() => {
@@ -45,14 +56,20 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Container className="App">
-        <Navigation />
+        <Navigation pages={pages} />
         <Routes>
-          <Route exact path="/" element={staticLoading ? <Spinner /> : <HomePage />} />
-          <Route exact path="/draft" element={draftLoading ? <Spinner /> : <DraftPage />} />
-          <Route exact path="/keepers" element={staticLoading ? <Spinner /> : <KeeperPage />} />
-          <Route exact path="/stats" element={staticLoading ? <Spinner /> : <StatPage />} />
-          <Route exact path="/history" element={staticLoading ? <Spinner /> : <HistoryPage />} />
-          <Route exact path="/rules" element={<RulePage />} />
+          {pages.map(page => {
+            const { path, name, component, loading } = page
+            return (
+              <Route
+                key={name}
+                exact
+                path={path}
+                element={loading ? (<Spinner />) : component} >
+                {name}
+              </Route>
+            )
+          })}
         </Routes>
       </Container>
     </ThemeProvider>

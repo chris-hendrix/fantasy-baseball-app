@@ -26,6 +26,7 @@ export default function DraftPage() {
           title="Draft"
           defaultPageSize={220}
           columnOptions={defaultColumnOptions}
+          rowGroupSize={10}
           {...draftTableData}
         />
       </Box>

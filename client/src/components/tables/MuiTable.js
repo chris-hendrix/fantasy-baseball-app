@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react'
 import { usePagination, useTable, useSortBy, useFilters } from 'react-table'
-import { tableCellClasses } from '@mui/material/TableCell'
 import {
-  styled,
   Box,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -16,34 +15,23 @@ import { useTheme } from '@mui/styles'
 import TablePaginationActions from './TablePaginationActions'
 import { FilterTypes, DefaultColumnFilter } from './TableFilters'
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
-  }
-}))
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0
-  }
-}))
-
-const addHyperlinksToColumns = columns => {
+const formatColumns = columns => {
   columns.forEach(column => {
-    if (!column.linkAccessor) return
-    column.Cell = ({ row }) => (
-      <a href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
-        {row.original[column.accessor]}
-      </a>
-    )
+    column.Cell = ({ row }) => {
+      const { linkAccessor, alignment } = column
+      const value = row.original[column.accessor]
+      return (
+        <Box sx={{ textAlign: alignment }}>
+          {linkAccessor ? (
+            <Link underline='hover' href={row.original[column.linkAccessor]} target="_blank" rel="noreferrer">
+              {value}
+            </Link>
+          ) : (
+            <span>{value}</span>
+          )}
+        </Box>
+      )
+    }
   })
 }
 
@@ -62,8 +50,11 @@ export default function MuiTable ({
   columns,
   data,
   defaultPageSize,
-  columnOptions }) {
-  addHyperlinksToColumns(columns)
+  columnOptions,
+  rowGroupSize = 1,
+  rowColors = ['row.white', 'row.grey']
+}) {
+  formatColumns(columns)
   addColumnOptions(columns, columnOptions)
 
   const theme = useTheme()
@@ -115,11 +106,11 @@ export default function MuiTable ({
           {headerGroups.map(headerGroup => (
             <TableRow style={{ verticalAlign: 'top' }}{...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <StyledTableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <TableCell theme={theme} align="center" {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </StyledTableCell>
+                </TableCell>
               ))}
             </TableRow>
           ))}
@@ -128,11 +119,13 @@ export default function MuiTable ({
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <StyledTableRow {...row.getRowProps()}>
+              <TableRow
+                {...row.getRowProps()}
+                sx={{ backgroundColor: rowColors[Math.floor(i / rowGroupSize) % rowColors.length] }}>
                 {row.cells.map(cell => {
                   return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
                 })}
-              </StyledTableRow>
+              </TableRow>
             )
           })}
         </TableBody>

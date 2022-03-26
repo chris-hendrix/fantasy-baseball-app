@@ -16,11 +16,17 @@ const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) =
     const sheet = doc.sheetsByTitle[sheetTitle]
     sheetPromises.push(
       sheet.loadHeaderRow()
+        .then(() => sheet.loadCells('1:1'))
         .then(() => sheet.getRows({ offset: 0 }))
         .then((rowObjects) => {
           /* eslint no-underscore-dangle: "off" */
           const rows = rowObjects.map((row) => row._rawData)
-          return { sheetTitle, rows, headers: sheet.headerValues }
+          const alignments = {}
+          sheet.headerValues.forEach((hv, i) => {
+            const cell = sheet.getCell(0, i)
+            alignments[hv] = cell._rawData.effectiveFormat.horizontalAlignment
+          })
+          return { sheetTitle, rows, headers: sheet.headerValues, alignments }
           /* eslint-enable */
         })
     )
@@ -28,8 +34,8 @@ const getSheetData = async (docId, clientEmail, privateKey, sheetNames = null) =
   const sheets = await Promise.all(sheetPromises)
   const sheetData = {}
   sheets.forEach((sheet) => {
-    const { sheetTitle, headers, rows } = sheet
-    sheetData[sheetTitle] = { headers, rows }
+    const { sheetTitle, headers, rows, alignments } = sheet
+    sheetData[sheetTitle] = { headers, rows, alignments }
   })
   return sheetData
 }

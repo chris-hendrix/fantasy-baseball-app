@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { AppBar, Toolbar, Button, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-export default function Navigation() {
+export default function Navigation ({ pages }) {
+  const { pathname } = useLocation()
   return (
     <AppBar position="static">
       <Toolbar>
@@ -16,24 +17,19 @@ export default function Navigation() {
         >
           MIT Fantasy Baseball
         </Typography>
-        <Button color="inherit" component={Link} to="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} to="/draft">
-          Draft
-        </Button>
-        <Button color="inherit" component={Link} to="/keepers">
-          Keepers
-        </Button>
-        <Button color="inherit" component={Link} to="/stats">
-          Stats
-        </Button>
-        <Button color="inherit" component={Link} to="/history">
-          History
-        </Button>
-        <Button color="inherit" component={Link} to="/rules">
-          Rules
-        </Button>
+        {pages.map(page => {
+          const { path, name } = page
+          return (
+            <Button
+              key={name}
+              component={Link}
+              to={path}
+              sx={{ color: path === pathname ? 'secondary.light' : 'inherit' }}
+            >
+              {name}
+            </Button>
+          )
+        })}
       </Toolbar>
     </AppBar>
   )

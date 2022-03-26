@@ -1,14 +1,14 @@
 const getTableData = (sheetData) => {
   const tableData = {}
-  Object.entries(sheetData).forEach(([sheetTitle, { headers, rows }]) => {
-    const { columns, data } = getColumnsAndData(headers, rows)
+  Object.entries(sheetData).forEach(([sheetTitle, { headers, rows, alignments }]) => {
+    const { columns, data } = getColumnsAndData(headers, rows, alignments)
     tableData[sheetTitle] = { columns, data }
   })
   return tableData
 }
 
-const getColumnsAndData = (headers, rows) => {
-  const columns = headers.map((header) => getColumn(header))
+const getColumnsAndData = (headers, rows, alignments) => {
+  const columns = headers.map((header) => getColumn(header, alignments[header]))
   const data = getData(columns, rows)
   return { columns, data }
 }
@@ -23,13 +23,14 @@ const getData = (columns, rows) => {
   return data
 }
 
-const getColumn = (header) => {
+const getColumn = (header, alignment) => {
   const column = {
     Header: header,
     accessor: getAccessor(header),
     show: true,
     disableFilters: true,
-    option: ''
+    option: '',
+    alignment: alignment ? alignment.toLowerCase() : undefined
   }
   if (header.includes(' - ')) [column.Header, column.option] = header.split(' - ')
   // hidden
