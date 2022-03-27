@@ -35,6 +35,7 @@ export default function DraftPage() {
           title="Player Pool"
           defaultPageSize={220}
           columnOptions={defaultColumnOptions}
+          columnValueColors={[{ accessor: 'owner', op: '!==', value: '<FA>', color: 'row.darkgrey' }]}
           {...playerTableData}
         />
       </Box>

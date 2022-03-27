@@ -52,7 +52,8 @@ export default function MuiTable ({
   defaultPageSize,
   columnOptions,
   rowGroupSize = 1,
-  rowColors = ['row.white', 'row.grey']
+  rowColors = ['row.white', 'row.grey'],
+  columnValueColors = []
 }) {
   formatColumns(columns)
   addColumnOptions(columns, columnOptions)
@@ -88,6 +89,7 @@ export default function MuiTable ({
         hiddenColumns: columns.filter(col => col.show === false).map(col => col.accessor)
       },
       autoResetPage: false,
+      autoResetSortBy: false,
       autoResetSelectedRows: false,
       autoResetFilters: false,
       disableMultiSort: true,
@@ -118,10 +120,18 @@ export default function MuiTable ({
         <TableBody>
           {page.map((row, i) => {
             prepareRow(row)
+            let backgroundColor = rowColors[Math.floor(i / rowGroupSize) % rowColors.length]
+            columnValueColors.forEach(cvc => {
+              if (
+                (cvc.op === '!==' && row.values[cvc.accessor] !== cvc.value) ||
+                (cvc.op === '===' && row.values[cvc.accessor] === cvc.value)
+              )
+                backgroundColor = cvc.color
+            })
             return (
               <TableRow
                 {...row.getRowProps()}
-                sx={{ backgroundColor: rowColors[Math.floor(i / rowGroupSize) % rowColors.length] }}>
+                sx={{ backgroundColor }}>
                 {row.cells.map(cell => {
                   return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>
                 })}
