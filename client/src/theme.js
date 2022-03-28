@@ -5,12 +5,13 @@ import "@fontsource/roboto"
 const theme = createTheme({
   palette: {
     secondary: { main: red[800], light: red[500] },
-    primary: { main: grey[800] },
+    primary: { main: grey[800], light: grey[500] },
     row: {
       header: grey[800],
       white: grey[0],
       grey: grey[200],
-      red: red[50]
+      red: red[50],
+      darkgrey: grey[400]
     }
   },
   typography: {

@@ -7,7 +7,7 @@ export const defaultColumnOptions = {
   Team: { Filter: SelectColumnFilter, disableSortBy: true },
   Owner: { Filter: SelectColumnFilter, disableSortBy: true },
   Pos: { Filter: PositionColumnFilter, disableSortBy: true },
-  ADP: { Filter: RoundColumnFilter, disableSortBy: true },
+  ADP: { Filter: RoundColumnFilter, disableSortBy: false },
   Pick: { Filter: RoundColumnFilter, disableSortBy: true },
   Year: { Filter: SelectColumnFilter, disableSortBy: true }
 }
