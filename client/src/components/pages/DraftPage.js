@@ -27,6 +27,7 @@ export default function DraftPage() {
           defaultPageSize={220}
           columnOptions={defaultColumnOptions}
           rowGroupSize={10}
+          columnValueColors={[{ accessor: 'pts', op: '>', value: 0, color: 'row.darkgrey' }]}
           {...draftTableData}
         />
       </Box>

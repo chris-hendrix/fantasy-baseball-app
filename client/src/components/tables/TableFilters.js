@@ -9,7 +9,8 @@ export const defaultColumnOptions = {
   Pos: { Filter: PositionColumnFilter, disableSortBy: true },
   ADP: { Filter: RoundColumnFilter, disableSortBy: false },
   Pick: { Filter: RoundColumnFilter, disableSortBy: true },
-  Year: { Filter: SelectColumnFilter, disableSortBy: true }
+  Year: { Filter: SelectColumnFilter, disableSortBy: true },
+  Status: { Filter: SelectColumnFilter, disableSortBy: true }
 }
 
 const TableTextField = props => (
