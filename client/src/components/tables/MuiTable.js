@@ -124,7 +124,8 @@ export default function MuiTable ({
             columnValueColors.forEach(cvc => {
               if (
                 (cvc.op === '!==' && row.values[cvc.accessor] !== cvc.value) ||
-                (cvc.op === '===' && row.values[cvc.accessor] === cvc.value)
+                (cvc.op === '===' && row.values[cvc.accessor] === cvc.value) ||
+                (cvc.op === '>' && row.values[cvc.accessor] > cvc.value)
               )
                 backgroundColor = cvc.color
             })
