@@ -7,6 +7,7 @@ export const defaultColumnOptions = {
   Team: { Filter: SelectColumnFilter, disableSortBy: true },
   Owner: { Filter: SelectColumnFilter, disableSortBy: true },
   Pos: { Filter: PositionColumnFilter, disableSortBy: true },
+  Rank: { Filter: RoundColumnFilter, disableSortBy: false },
   ADP: { Filter: RoundColumnFilter, disableSortBy: false },
   Pick: { Filter: RoundColumnFilter, disableSortBy: true },
   Year: { Filter: SelectColumnFilter, disableSortBy: true },
@@ -107,7 +108,7 @@ export function PositionColumnFilter ({ column: { filterValue, setFilter, preFil
 export function RoundColumnFilter ({ column: { filterValue, setFilter, preFilteredRows, id } }) {
   const options = () => {
     const rounds = []
-    for (var i = 1; i < 24; i++) {
+    for (var i = 1; i < 31; i++) {
       var round = '0' + i + ':'
       if (i >= 10) {
         round = i + ':'
